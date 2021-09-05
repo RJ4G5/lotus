@@ -37,7 +37,18 @@ class Home extends StatelessWidget {
               WindowTitleBarBox(
                   child: Row(children: [
                 Expanded(child: MoveWindow()),
-                WindowButtons()
+                Row(
+                  children: [
+                    MinimizeWindowButton(colors: buttonColors),
+                    MaximizeWindowButton(colors: buttonColors),
+                    CloseWindowButton(
+                        colors: WindowButtonColors(
+                            mouseOver: Color(0xFFD32F2F),
+                            mouseDown: Color(0xFFB71C1C),
+                            iconNormal: Colors.white,
+                            iconMouseOver: Colors.white)),
+                  ],
+                )
               ])),
             ])));
   }
@@ -49,21 +60,3 @@ final buttonColors = WindowButtonColors(
     mouseDown: Color(0x69C5CAE9),
     iconMouseOver: Colors.white,
     iconMouseDown: Colors.white);
-
-class WindowButtons extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        MinimizeWindowButton(colors: buttonColors),
-        MaximizeWindowButton(colors: buttonColors),
-        CloseWindowButton(
-            colors: WindowButtonColors(
-                mouseOver: Color(0xFFD32F2F),
-                mouseDown: Color(0xFFB71C1C),
-                iconNormal: Colors.white,
-                iconMouseOver: Colors.white)),
-      ],
-    );
-  }
-}
