@@ -59,28 +59,79 @@ class Home extends StatelessWidget {
               Spacer(),
               CustomPaint(
                   child: Container(
+             
                     height: 350,
                     //decoration: BoxDecoration(color: Color(0xffffffff)),
                     child: Column(
                       children: [
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Container(
-                            padding: EdgeInsets.all(10.0),
-                            margin: EdgeInsets.only(left: 48.0, top: 0),
-                            transform: Matrix4.translationValues(0.0, -50.0, 0.0),
-                            width: 120,
-                            height: 120,
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.white, width: 5),
-                              shape: BoxShape.circle,
-                              color: Colors.white,
-                              // image: DecorationImage(
-                              //  fit: BoxFit.cover,
-                              //    image: AssetImage('images/profile.png'),
-                              //    ),
+                        Stack(
+                          children: [
+                            Column(
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(bottom:0.0 ,left: 10.0,right:10.0 ,top: 10.0 ),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Color(0xffB0BEC5), width: 2),
+                                    borderRadius: BorderRadius.circular(5),
+                                 
+                                  ),
+                                  height: 170,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(bottom:1.0 ,left: 10.0,right:10.0 ,top: 10.0 ),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Color(0xffB0BEC5), width: 2),
+                                    borderRadius: BorderRadius.circular(5),
+                                   
+                                  ),
+                                  height: 135,
+                                  child: Column(children: [
+                                    Container(
+                                      margin: EdgeInsets.only(bottom:0 ,left: 5.0,right:5.0 ,top: 5.0 ),
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                        color: Color(0xffECEFF1),                                        
+                                        borderRadius: BorderRadius.circular(5),
+                                   
+                                    )
+                                      ),
+                                    Container(
+                                    margin: EdgeInsets.all(5.0),
+                                     decoration: BoxDecoration(
+                                        color: Color(0xffECEFF1),                                        
+                                        borderRadius: BorderRadius.circular(5),
+                                   
+                                    ),
+                                    height: 85,
+                                    )
+                                  ],),
+                                ),
+                                Text("Criado por Melquizedeque S. Lobo     V 1.0")
+                              ],
                             ),
-                          ),
+                            Positioned(
+                              child: Container(
+                                padding: EdgeInsets.all(10.0),
+                                margin: EdgeInsets.only(left: 48.0, top: 0),
+                                transform:
+                                    Matrix4.translationValues(0.0, -50.0, 0.0),
+                                width: 120,
+                                height: 120,
+                                decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.white, width: 5),
+                                  shape: BoxShape.circle,
+                                  color: Colors.white,
+                                  // image: DecorationImage(
+                                  //  fit: BoxFit.cover,
+                                  //    image: AssetImage('images/profile.png'),
+                                  //    ),
+                                ),
+                              ),
+                            )
+                          ],
                         ),
                       ],
                     ),
