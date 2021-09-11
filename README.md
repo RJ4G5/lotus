@@ -1,5 +1,5 @@
 # Lotus - Cadastro simples de clientes
-Cadastro básico de pessoas física e jurídica com encriptação e banco de dados local
+Cadastro básico de pessoas físicas e jurídicas com encriptação e banco de dados local
 
 ###### Proposta
 - Interface simples, moderna e intuitiva
