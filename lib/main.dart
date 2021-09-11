@@ -25,7 +25,12 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
             body: WindowBorder(
-                color: borderColor, width: 1, child: Row(children: [Home()]))));
+                      color: borderColor,
+                      width: 1,
+                      child: Row( children: [ Home() ] )
+                  )
+              )
+          );
   }
 }
 
@@ -43,17 +48,19 @@ class Home extends StatelessWidget {
                   children: [
                     MinimizeWindowButton(
                         colors: WindowButtonColors(
-                            iconNormal: Colors.white,
-                            mouseOver: Color(0x69E8EAF6),
-                            mouseDown: Color(0x69C5CAE9),
-                            iconMouseOver: Colors.white,
-                            iconMouseDown: Colors.white)),
+                                    iconNormal: Colors.white,
+                                    mouseOver: Color(0x69E8EAF6),
+                                    mouseDown: Color(0x69C5CAE9),
+                                    iconMouseOver: Colors.white,
+                                    iconMouseDown: Colors.white)
+                                ),
                     CloseWindowButton(
                         colors: WindowButtonColors(
-                            mouseOver: Color(0xFFD32F2F),
-                            mouseDown: Color(0xFFB71C1C),
-                            iconNormal: Colors.white,
-                            iconMouseOver: Colors.white)),
+                                    mouseOver: Color(0xFFD32F2F),
+                                    mouseDown: Color(0xFFB71C1C),
+                                    iconNormal: Colors.white,
+                                    iconMouseOver: Colors.white)
+                                ),
                   ],
                 ),
               ])),
@@ -69,103 +76,88 @@ class Home extends StatelessWidget {
                             Column(
                               children: [
                                 Container(
-                                  margin: EdgeInsets.only(
-                                      bottom: 0.0,
-                                      left: 10.0,
-                                      right: 10.0,
-                                      top: 10.0),
+                                  margin: EdgeInsets.only(bottom: 0.0,left: 10.0, right: 10.0,top: 10.0),
                                   decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Color(0xffB0BEC5), width: 2),
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
+                                                  border: Border.all(color: Color(0xffB0BEC5), width: 2),
+                                                  borderRadius: BorderRadius.circular(5),
+                                              ),
                                   height: 170,
                                 ),
                                 Container(
-                                  margin: EdgeInsets.only(
-                                      bottom: 1.0,
-                                      left: 10.0,
-                                      right: 10.0,
-                                      top: 10.0),
+                                  margin: EdgeInsets.only(bottom: 1.0,left: 10.0,right: 10.0,top: 10.0),
                                   decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Color(0xffB0BEC5), width: 2),
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
+                                                  border: Border.all(color: Color(0xffB0BEC5), width: 2),
+                                                  borderRadius: BorderRadius.circular(5),
+                                              ),
                                   height: 135,
                                   child: Column(
                                     children: [
                                       Container(
-                                        margin: EdgeInsets.only(
-                                            bottom: 0,
-                                            left: 5.0,
-                                            right: 5.0,
-                                            top: 5.0),
-                                        height: 30,
-                                        decoration: BoxDecoration(
-                                            color: Color(0xffECEFF1),
-                                            borderRadius:
-                                                BorderRadius.circular(5)),
-                                        child: TextFormField(
-                                          decoration: const InputDecoration(
-                                              contentPadding:
-                                                  EdgeInsets.all(5.0),
-                                              focusedBorder: OutlineInputBorder(
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                          Color(0xFF3F51B5))),
-                                              border: OutlineInputBorder(),
-                                              hintText: 'Buscar clientes'),
-                                        ),
+                                            margin: EdgeInsets.only( bottom: 0,left: 5.0,right: 5.0,top: 5.0),
+                                            height: 30,
+                                            decoration: BoxDecoration(
+                                                            color: Color(0xffECEFF1),
+                                                            borderRadius: BorderRadius.circular(5)
+                                                        ),
+                                            child: TextFormField(
+                                                        decoration: const InputDecoration(
+                                                            contentPadding:EdgeInsets.all(5.0),
+                                                            focusedBorder: OutlineInputBorder(
+                                                                                borderSide: const BorderSide (
+                                                                                                      color: Color(0xFF3F51B5)
+                                                                                                  )
+                                                                            ),
+                                                            border: OutlineInputBorder(),
+                                                            hintText: 'Buscar clientes'),
+                                                  ),
                                       ),
                                       Container(
                                         margin: EdgeInsets.all(5.0),
                                         decoration: BoxDecoration(
-                                          color: Color(0xffECEFF1),
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                        ),
+                                                        color: Color(0xffECEFF1),
+                                                        borderRadius: BorderRadius.circular(5),
+                                                    ),
                                         height: 85,
                                         child: SfDataGrid(
-                                          headerRowHeight: 25.0,
-                                          rowHeight: 25.0,
-                                          selectionMode: SelectionMode.single,
-                                          gridLinesVisibility: GridLinesVisibility.both,
-                                           columnWidthMode: ColumnWidthMode.fill,
-                                             columns: <GridColumn>[
-                                            GridColumn(
-                                                columnName: 'Nome',
-                                                label: Container(
-                                                    alignment: Alignment.center,
-                                                    child: Text('Nome/Razão Social')
-                                                    )
-                                            ),
-                                            GridColumn(
-                                                columnName: 'CNPJ/CPF',
-                                                label: Container(
-                                                    alignment: Alignment.center,
-                                                    child: Text('CNPJ/CPF')
-                                                    )
-                                            ),
-                                            GridColumn(
-                                                columnName: 'acoes',
-                                                  width: 100,
-                                                label: Container(
-                                                    height: 10,
-                                                    alignment: Alignment.center,
-                                                    child: Text('Ações')
-                                                    )
-                                            ),
-                                          ],
-                                          source:
-                                              EmployeeDataSource(employeeData: [
-                                                  Employee('Jéssica Malu Galvão', '21.291.366/0001-37', "Excluir"),
-                                                  Employee('CEL CONSULTORIA E GESTÃO EMPRESARIAL LTDA', '172.113.753-02', "Excluir"),
-                                                  Employee('C.C.L. GEBER E CIA LTDA', '93.155.119/0001-14', "Excluir"),
-                                                  Employee('Cauê Calebe Juan Nascimento', '202.764.665-51', "Excluir"),
-                                                  Employee('Alícia e Rita Financeira Ltda', '48.782.145/0001-18', "Excluir"),                                         
-                                          ]),
-                                         
+                                            headerRowHeight: 25.0,
+                                            rowHeight: 25.0,
+                                            selectionMode: SelectionMode.single,
+                                            gridLinesVisibility: GridLinesVisibility.both,
+                                            columnWidthMode: ColumnWidthMode.fill,
+                                            columns: <GridColumn>[
+                                                  GridColumn(
+                                                      columnName: 'Nome',
+                                                      label: Container(
+                                                                alignment: Alignment.center,
+                                                                child: Text('Nome/Razão Social')
+                                                              )
+                                                  ),
+                                                  GridColumn(
+                                                      columnName: 'CNPJ/CPF',
+                                                      label: Container(
+                                                                alignment: Alignment.center,
+                                                                child: Text('CNPJ/CPF')
+                                                              )
+                                                  ),
+                                                  GridColumn(
+                                                      columnName: 'acoes',
+                                                      width: 100,
+                                                      label: Container(
+                                                                height: 10,
+                                                                alignment: Alignment.center,
+                                                                child: Text('Ações')
+                                                              )
+                                                  ),
+                                            ],
+                                            source:
+                                                EmployeeDataSource(employeeData: [
+                                                    Employee('Jéssica Malu Galvão', '21.291.366/0001-37', "Excluir"),
+                                                    Employee('CEL CONSULTORIA E GESTÃO EMPRESARIAL LTDA', '172.113.753-02', "Excluir"),
+                                                    Employee('C.C.L. GEBER E CIA LTDA', '93.155.119/0001-14', "Excluir"),
+                                                    Employee('Cauê Calebe Juan Nascimento', '202.764.665-51', "Excluir"),
+                                                    Employee('Alícia e Rita Financeira Ltda', '48.782.145/0001-18', "Excluir"),                                         
+                                            ]),
+                                          
                                        
                                         ),
                                       )
@@ -178,23 +170,21 @@ class Home extends StatelessWidget {
                             ),
                             Positioned(
                               child: Container(
-                                padding: EdgeInsets.all(10.0),
-                                margin: EdgeInsets.only(left: 48.0, top: 0),
-                                transform:
-                                    Matrix4.translationValues(0.0, -50.0, 0.0),
-                                width: 120,
-                                height: 120,
-                                decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.white, width: 5),
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                  // image: DecorationImage(
-                                  //  fit: BoxFit.cover,
-                                  //    image: AssetImage('images/profile.png'),
-                                  //    ),
-                                ),
-                              ),
+                                          padding: EdgeInsets.all(10.0),
+                                          margin: EdgeInsets.only(left: 48.0, top: 0),
+                                          transform: Matrix4.translationValues(0.0, -50.0, 0.0),
+                                          width: 120,
+                                          height: 120,
+                                          decoration: BoxDecoration(
+                                                          border:Border.all(color: Colors.white, width: 5),
+                                                          shape: BoxShape.circle,
+                                                          color: Colors.white,
+                                                          // image: DecorationImage(
+                                                          //  fit: BoxFit.cover,
+                                                          //    image: AssetImage('images/profile.png'),
+                                                          //    ),
+                                                      ),
+                                      ),
                             )
                           ],
                         ),
@@ -218,22 +208,14 @@ class MyPainter extends CustomPainter {
     path = Path();
 
     path.lineTo(size.width * 0.31, 0);
-    path.cubicTo(size.width * 0.3, size.height * 0.01, size.width * 0.3,
-        size.height * 0.01, size.width * 0.3, size.height * 0.02);
-    path.cubicTo(size.width * 0.3, size.height * 0.18, size.width / 5,
-        size.height * 0.28, size.width * 0.12, size.height / 5);
-    path.cubicTo(size.width * 0.08, size.height * 0.16, size.width * 0.06,
-        size.height * 0.09, size.width * 0.06, size.height * 0.02);
-    path.cubicTo(size.width * 0.06, size.height * 0.01, size.width * 0.06,
-        size.height * 0.01, size.width * 0.05, 0);
-    path.cubicTo(size.width * 0.05, 0, 0, 0, 0, 0);
+    path.cubicTo(size.width * 0.3, size.height * 0.01, size.width * 0.3, size.height * 0.01, size.width * 0.3, size.height * 0.02);
+    path.cubicTo(size.width * 0.3, size.height * 0.18, size.width / 5,   size.height * 0.28, size.width * 0.12, size.height / 5);
+    path.cubicTo(size.width * 0.08, size.height * 0.16, size.width * 0.06, size.height * 0.09, size.width * 0.06, size.height * 0.02);
+    path.cubicTo(size.width * 0.06, size.height * 0.01, size.width * 0.06,  size.height * 0.01, size.width * 0.05, 0);  path.cubicTo(size.width * 0.05, 0, 0, 0, 0, 0);
     path.cubicTo(0, 0, 0, size.height, 0, size.height);
-    path.cubicTo(
-        0, size.height, size.width, size.height, size.width, size.height);
-    path.cubicTo(size.width, size.height, size.width, 0, size.width, 0);
+    path.cubicTo( 0, size.height, size.width, size.height, size.width, size.height);  path.cubicTo(size.width, size.height, size.width, 0, size.width, 0);
     path.cubicTo(size.width, 0, size.width * 0.31, 0, size.width * 0.31, 0);
-    path.cubicTo(
-        size.width * 0.31, 0, size.width * 0.31, 0, size.width * 0.31, 0);
+    path.cubicTo(size.width * 0.31, 0, size.width * 0.31, 0, size.width * 0.31, 0);
     canvas.drawPath(path, paint);
   }
 
@@ -281,14 +263,13 @@ class EmployeeDataSource extends DataGridSource {
   @override
   DataGridRowAdapter buildRow(DataGridRow row) {
     return DataGridRowAdapter(
-        cells: row.getCells().map<Widget>((e) {
-    
-      return Container(
-        padding: EdgeInsets.only(left: 3),
-        width: row.getCells().indexOf(e) == 0 ? 200 : null,
-        alignment:  row.getCells().indexOf(e) == 0 ? Alignment.centerLeft : Alignment.center,
-        child: Text(e.value.toString()),
-      );
+        cells: row.getCells().map<Widget>((e) {    
+            return Container(
+              padding: EdgeInsets.only(left: 3),
+              width: row.getCells().indexOf(e) == 0 ? 200 : null,
+              alignment:  row.getCells().indexOf(e) == 0 ? Alignment.centerLeft : Alignment.center,
+              child: Text(e.value.toString()),
+            );
     }).toList());
   }
 }
