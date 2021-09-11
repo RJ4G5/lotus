@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 void main() {
   runApp(MyApp());
@@ -59,7 +60,6 @@ class Home extends StatelessWidget {
               Spacer(),
               CustomPaint(
                   child: Container(
-             
                     height: 350,
                     //decoration: BoxDecoration(color: Color(0xffffffff)),
                     child: Column(
@@ -69,46 +69,111 @@ class Home extends StatelessWidget {
                             Column(
                               children: [
                                 Container(
-                                  margin: EdgeInsets.only(bottom:0.0 ,left: 10.0,right:10.0 ,top: 10.0 ),
+                                  margin: EdgeInsets.only(
+                                      bottom: 0.0,
+                                      left: 10.0,
+                                      right: 10.0,
+                                      top: 10.0),
                                   decoration: BoxDecoration(
                                     border: Border.all(
                                         color: Color(0xffB0BEC5), width: 2),
                                     borderRadius: BorderRadius.circular(5),
-                                 
                                   ),
                                   height: 170,
                                 ),
                                 Container(
-                                  margin: EdgeInsets.only(bottom:1.0 ,left: 10.0,right:10.0 ,top: 10.0 ),
+                                  margin: EdgeInsets.only(
+                                      bottom: 1.0,
+                                      left: 10.0,
+                                      right: 10.0,
+                                      top: 10.0),
                                   decoration: BoxDecoration(
                                     border: Border.all(
                                         color: Color(0xffB0BEC5), width: 2),
                                     borderRadius: BorderRadius.circular(5),
-                                   
                                   ),
                                   height: 135,
-                                  child: Column(children: [
-                                    Container(
-                                      margin: EdgeInsets.only(bottom:0 ,left: 5.0,right:5.0 ,top: 5.0 ),
-                                      height: 30,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xffECEFF1),                                        
-                                        borderRadius: BorderRadius.circular(5),
-                                   
-                                    )
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                            bottom: 0,
+                                            left: 5.0,
+                                            right: 5.0,
+                                            top: 5.0),
+                                        height: 30,
+                                        decoration: BoxDecoration(
+                                            color: Color(0xffECEFF1),
+                                            borderRadius:
+                                                BorderRadius.circular(5)),
+                                        child: TextFormField(
+                                          decoration: const InputDecoration(
+                                              contentPadding:
+                                                  EdgeInsets.all(5.0),
+                                              focusedBorder: OutlineInputBorder(
+                                                  borderSide: const BorderSide(
+                                                      color:
+                                                          Color(0xFF3F51B5))),
+                                              border: OutlineInputBorder(),
+                                              hintText: 'Buscar clientes'),
+                                        ),
                                       ),
-                                    Container(
-                                    margin: EdgeInsets.all(5.0),
-                                     decoration: BoxDecoration(
-                                        color: Color(0xffECEFF1),                                        
-                                        borderRadius: BorderRadius.circular(5),
-                                   
-                                    ),
-                                    height: 85,
-                                    )
-                                  ],),
+                                      Container(
+                                        margin: EdgeInsets.all(5.0),
+                                        decoration: BoxDecoration(
+                                          color: Color(0xffECEFF1),
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                        height: 85,
+                                        child: SfDataGrid(
+                                          headerRowHeight: 25.0,
+                                          rowHeight: 25.0,
+                                          selectionMode: SelectionMode.single,
+                                          gridLinesVisibility: GridLinesVisibility.both,
+                                           columnWidthMode: ColumnWidthMode.fill,
+                                             columns: <GridColumn>[
+                                            GridColumn(
+                                                columnName: 'Nome',
+                                                label: Container(
+                                                    alignment: Alignment.center,
+                                                    child: Text('Nome/Razão Social')
+                                                    )
+                                            ),
+                                            GridColumn(
+                                                columnName: 'CNPJ/CPF',
+                                                label: Container(
+                                                    alignment: Alignment.center,
+                                                    child: Text('CNPJ/CPF')
+                                                    )
+                                            ),
+                                            GridColumn(
+                                                columnName: 'acoes',
+                                                  width: 100,
+                                                label: Container(
+                                                    height: 10,
+                                                    alignment: Alignment.center,
+                                                    child: Text('Ações')
+                                                    )
+                                            ),
+                                          ],
+                                          source:
+                                              EmployeeDataSource(employeeData: [
+                                                  Employee('Jéssica Malu Galvão', '21.291.366/0001-37', "Excluir"),
+                                                  Employee('CEL CONSULTORIA E GESTÃO EMPRESARIAL LTDA', '172.113.753-02', "Excluir"),
+                                                  Employee('C.C.L. GEBER E CIA LTDA', '93.155.119/0001-14', "Excluir"),
+                                                  Employee('Cauê Calebe Juan Nascimento', '202.764.665-51', "Excluir"),
+                                                  Employee('Alícia e Rita Financeira Ltda', '48.782.145/0001-18', "Excluir"),                                         
+                                          ]),
+                                         
+                                       
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
-                                Text("Criado por Melquizedeque S. Lobo     V 1.0")
+                                Text(
+                                    "Criado por Melquizedeque S. Lobo     V 1.0")
                               ],
                             ),
                             Positioned(
@@ -175,5 +240,55 @@ class MyPainter extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
     return true;
+  }
+}
+
+class Employee {
+  /// Creates the employee class with required details.
+  Employee(this.nome, this.cnpjcpf, this.acoes);
+
+  /// Id of an employee.
+  final String nome;
+
+  /// Name of an employee.
+  final String cnpjcpf;
+
+  /// Designation of an employee.
+
+  /// Salary of an employee.
+  final String acoes;
+}
+
+/// An object to set the employee collection data source to the datagrid. This
+/// is used to map the employee data to the datagrid widget.
+class EmployeeDataSource extends DataGridSource {
+  /// Creates the employee data source class with required details.
+  EmployeeDataSource({required List<Employee> employeeData}) {
+    _employeeData = employeeData
+        .map<DataGridRow>((e) => DataGridRow(cells: [
+              DataGridCell<String>(columnName: 'nome', value: e.nome),
+              DataGridCell<String>(columnName: 'CNPJ/CPF', value: e.cnpjcpf),
+              DataGridCell<String>(columnName: 'acoes', value: e.acoes),
+            ]))
+        .toList();
+  }
+
+  List<DataGridRow> _employeeData = [];
+
+  @override
+  List<DataGridRow> get rows => _employeeData;
+
+  @override
+  DataGridRowAdapter buildRow(DataGridRow row) {
+    return DataGridRowAdapter(
+        cells: row.getCells().map<Widget>((e) {
+    
+      return Container(
+        padding: EdgeInsets.only(left: 3),
+        width: row.getCells().indexOf(e) == 0 ? 200 : null,
+        alignment:  row.getCells().indexOf(e) == 0 ? Alignment.centerLeft : Alignment.center,
+        child: Text(e.value.toString()),
+      );
+    }).toList());
   }
 }
