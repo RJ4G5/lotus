@@ -3,6 +3,6 @@ Cadastro básico de pessoas física e jurídica com encriptação e banco de dad
 
 ###### Proposta
 - Interface simples, moderna e intuitiva
-- Banco de dados local e encriptado
+- Banco de dados local, NoSQL e com encriptação
 - Sem necesidade de rodar com vm em runtime
 - Cadastro de pessoa física e jurídica
