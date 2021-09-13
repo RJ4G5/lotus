@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
+import 'Models/model_table_cliente.dart';
+import 'RowAdapter.dart';
 
 void main() {
   runApp(MyApp());
@@ -149,14 +151,13 @@ class Home extends StatelessWidget {
                                                               )
                                                   ),
                                             ],
-                                            source:
-                                                EmployeeDataSource(employeeData: [
-                                                    Employee('Jéssica Malu Galvão', '21.291.366/0001-37', "Excluir"),
-                                                    Employee('CEL CONSULTORIA E GESTÃO EMPRESARIAL LTDA', '172.113.753-02', "Excluir"),
-                                                    Employee('C.C.L. GEBER E CIA LTDA', '93.155.119/0001-14', "Excluir"),
-                                                    Employee('Cauê Calebe Juan Nascimento', '202.764.665-51', "Excluir"),
-                                                    Employee('Alícia e Rita Financeira Ltda', '48.782.145/0001-18', "Excluir"),                                         
-                                            ]),
+                                            source: RowAdapter(employeeData: [  
+                                                          TD('Jéssica Malu Galvão', '21.291.366/0001-37', "Excluir"),
+                                                          TD('CEL CONSULTORIA E GESTÃO EMPRESARIAL LTDA', '172.113.753-02', "Excluir"),
+                                                          TD('C.C.L. GEBER E CIA LTDA', '93.155.119/0001-14', "Excluir"),
+                                                          TD('Cauê Calebe Juan Nascimento', '202.764.665-51', "Excluir"),
+                                                          TD('Alícia e Rita Financeira Ltda', '48.782.145/0001-18', "Excluir"),                                         
+                                                    ]),
                                           
                                        
                                         ),
@@ -222,54 +223,5 @@ class MyPainter extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
     return true;
-  }
-}
-
-class Employee {
-  /// Creates the employee class with required details.
-  Employee(this.nome, this.cnpjcpf, this.acoes);
-
-  /// Id of an employee.
-  final String nome;
-
-  /// Name of an employee.
-  final String cnpjcpf;
-
-  /// Designation of an employee.
-
-  /// Salary of an employee.
-  final String acoes;
-}
-
-/// An object to set the employee collection data source to the datagrid. This
-/// is used to map the employee data to the datagrid widget.
-class EmployeeDataSource extends DataGridSource {
-  /// Creates the employee data source class with required details.
-  EmployeeDataSource({required List<Employee> employeeData}) {
-    _employeeData = employeeData
-        .map<DataGridRow>((e) => DataGridRow(cells: [
-              DataGridCell<String>(columnName: 'nome', value: e.nome),
-              DataGridCell<String>(columnName: 'CNPJ/CPF', value: e.cnpjcpf),
-              DataGridCell<String>(columnName: 'acoes', value: e.acoes),
-            ]))
-        .toList();
-  }
-
-  List<DataGridRow> _employeeData = [];
-
-  @override
-  List<DataGridRow> get rows => _employeeData;
-
-  @override
-  DataGridRowAdapter buildRow(DataGridRow row) {
-    return DataGridRowAdapter(
-        cells: row.getCells().map<Widget>((e) {    
-            return Container(
-              padding: EdgeInsets.only(left: 3),
-              width: row.getCells().indexOf(e) == 0 ? 200 : null,
-              alignment:  row.getCells().indexOf(e) == 0 ? Alignment.centerLeft : Alignment.center,
-              child: Text(e.value.toString()),
-            );
-    }).toList());
   }
 }
