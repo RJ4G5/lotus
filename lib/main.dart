@@ -67,12 +67,90 @@ class Home extends StatelessWidget {
                 ),
               ])),
               Spacer(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only( bottom: 5.0, left: 5.0, right: 10.0, top: 5.0),
+                      height: 35,
+                      width: 250,
+                      decoration: BoxDecoration(
+                          color: Color(0xffECEFF1),
+                          borderRadius: BorderRadius.circular(5)
+                      ),
+
+                      child:  TextFormField(
+                        decoration: const InputDecoration(
+                            contentPadding:EdgeInsets.all(5.0),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide (
+                                    color: Color(0xFF3F51B5)
+                                )
+                            ),
+                            border: OutlineInputBorder(),
+                            hintText: 'CNPJ/CPF'),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only( right: 10.0),
+                      height: 35,
+                      width: 150,
+                      clipBehavior: Clip.hardEdge,
+                      decoration: BoxDecoration(
+
+                          borderRadius: BorderRadius.circular(5)
+                      ),
+                      child: Row(
+                        children: [
+
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: Color(0xffECEFF1),
+                                onPrimary:Color(0xff757575),
+                                shape: new RoundedRectangleBorder(),
+                                fixedSize: Size(50,35),
+                                minimumSize: Size(50,35)
+                            ),
+                            onPressed: () {},
+                            child: const Icon(Icons.note_add),
+                          ),
+                          ElevatedButton(
+
+                            style: ElevatedButton.styleFrom(
+                                primary: Color(0xffECEFF1),
+                                onPrimary:Color(0xff757575),
+                                shape: new RoundedRectangleBorder(),
+                                fixedSize: Size(50,35),
+                                minimumSize: Size(50,35)
+                            ),
+                            onPressed: () {},
+                            child: const Icon(Icons.save),
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: Color(0xffECEFF1),
+                                onPrimary:Color(0xff757575),
+                                shape: new RoundedRectangleBorder(),
+                                fixedSize: Size(50,35),
+                                minimumSize: Size(50,35)
+                            ),
+                            onPressed: () {},
+                            child: const Icon(Icons.delete),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+
+
               CustomPaint(
                   child: Container(
                     height: 350,
                     //decoration: BoxDecoration(color: Color(0xffffffff)),
                     child: Column(
                       children: [
+                        
                         Stack(
                           children: [
                             Column(
