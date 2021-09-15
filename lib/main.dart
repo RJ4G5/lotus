@@ -80,6 +80,7 @@ class Home extends StatelessWidget {
                       ),
 
                       child:  TextFormField(
+
                         decoration: const InputDecoration(
                             contentPadding:EdgeInsets.all(5.0),
                             focusedBorder: OutlineInputBorder(
@@ -88,6 +89,7 @@ class Home extends StatelessWidget {
                                 )
                             ),
                             border: OutlineInputBorder(),
+
                             hintText: 'CNPJ/CPF'),
                       ),
                     ),
@@ -150,30 +152,236 @@ class Home extends StatelessWidget {
                     //decoration: BoxDecoration(color: Color(0xffffffff)),
                     child: Column(
                       children: [
-                        
+
                         Stack(
                           children: [
                             Column(
                               children: [
                                 Container(
                                   margin: EdgeInsets.only(bottom: 0.0,left: 10.0, right: 10.0,top: 10.0),
-                                  decoration: BoxDecoration(
-                                                  border: Border.all(color: Color(0xffB0BEC5), width: 2),
-                                                  borderRadius: BorderRadius.circular(5),
-                                              ),
-                                  height: 170,
+
+                                  height: 130,
+                                  child: Column(
+                                      children: [
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.end,
+                                            children:  [
+                                                Container(
+                                                    width: 200,
+                                                    height: 35,
+                                                    margin: EdgeInsets.only(right: 3),
+                                                    child:TextFormField(
+                                                            decoration: const InputDecoration(
+                                                                contentPadding:EdgeInsets.all(5.0),
+                                                                focusedBorder: OutlineInputBorder(
+                                                                    borderSide: const BorderSide (
+                                                                      color: Color(0xFF3F51B5)
+                                                                    )
+                                                                ),
+                                                                border: OutlineInputBorder(),
+                                                                labelStyle: TextStyle(
+                                                                    color: Color(0xFF757575)
+                                                                ),
+                                                                labelText: 'Nome Fantasia'
+
+                                                            ),
+                                                          )
+
+                                                ),
+                                                Container(
+                                                    width: 200,
+                                                    height: 35,
+                                                    child:TextFormField(
+                                                              decoration: const InputDecoration(
+                                                                  contentPadding:EdgeInsets.all(5.0),
+                                                                  focusedBorder: OutlineInputBorder(
+                                                                        borderSide: const BorderSide (
+                                                                            color: Color(0xFF3F51B5)
+                                                                        )
+                                                                  ),
+                                                                  border: OutlineInputBorder(),
+                                                                  labelStyle: TextStyle(
+                                                                      color: Color(0xFF757575)
+                                                                  ),
+                                                                  labelText: 'Razão Social'
+                                                              ),
+                                                          )
+
+                                              )
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children:  [
+                                            Container(
+                                                width: 260,
+                                                height: 35,
+                                                margin: EdgeInsets.only(right: 3,top: 5),
+                                                child:TextFormField(
+                                                  decoration: const InputDecoration(
+                                                      contentPadding:EdgeInsets.all(5.0),
+                                                      focusedBorder: OutlineInputBorder(
+                                                          borderSide: const BorderSide (
+                                                              color: Color(0xFF3F51B5)
+                                                          )
+                                                      ),
+                                                      border: OutlineInputBorder(),
+                                                      labelStyle: TextStyle(
+                                                          color: Color(0xFF757575)
+                                                      ),
+                                                      labelText: 'Email'
+                                                  ),
+                                                )
+
+                                            ),
+                                            Container(
+                                                width: 140,
+                                                height: 35,
+                                                margin: EdgeInsets.only(top: 5),
+                                                child:TextFormField(
+                                                  decoration: const InputDecoration(
+                                                      contentPadding:EdgeInsets.all(5.0),
+                                                      focusedBorder: OutlineInputBorder(
+                                                          borderSide: const BorderSide (
+                                                              color: Color(0xFF3F51B5)
+                                                          )
+                                                      ),
+                                                      border: OutlineInputBorder(),
+                                                      labelStyle: TextStyle(
+                                                          color: Color(0xFF757575)
+                                                      ),
+                                                      labelText: 'Telefone'
+                                                  ),
+                                                )
+
+                                            )
+                                          ],
+                                        ),
+                                        Row(
+
+                                          children:  [
+                                            Container(
+                                                width: 90,
+                                                height: 35,
+                                                margin: EdgeInsets.only(right: 3,top: 5),
+                                                child:TextFormField(
+                                                  decoration: const InputDecoration(
+                                                      contentPadding:EdgeInsets.all(5.0),
+                                                      focusedBorder: OutlineInputBorder(
+                                                          borderSide: const BorderSide (
+                                                              color: Color(0xFF3F51B5)
+                                                          )
+                                                      ),
+                                                      border: OutlineInputBorder(),
+                                                      labelStyle: TextStyle(
+                                                          color: Color(0xFF757575)
+                                                      ),
+                                                      labelText: 'CEP'
+                                                  ),
+                                                )
+
+                                            ),
+                                            Container(
+                                                width: 200,
+                                                height: 35,
+                                                margin: EdgeInsets.only(top: 5,right: 3),
+                                                child:TextFormField(
+                                                  decoration: const InputDecoration(
+                                                      contentPadding:EdgeInsets.all(5.0),
+                                                      focusedBorder: OutlineInputBorder(
+                                                          borderSide: const BorderSide (
+                                                              color: Color(0xFF3F51B5)
+                                                          )
+                                                      ),
+                                                      border: OutlineInputBorder(),
+                                                      labelStyle: TextStyle(
+                                                          color: Color(0xFF757575)
+                                                      ),
+                                                      labelText: 'Endereço'
+                                                  ),
+                                                )
+
+                                            ),
+                                            Container(
+                                                width: 60,
+                                                height: 35,
+                                                margin: EdgeInsets.only(top: 5,right: 3),
+                                                child:TextFormField(
+                                                  decoration: const InputDecoration(
+                                                      contentPadding:EdgeInsets.all(5.0),
+                                                      focusedBorder: OutlineInputBorder(
+                                                          borderSide: const BorderSide (
+                                                              color: Color(0xFF3F51B5)
+                                                          )
+                                                      ),
+                                                      border: OutlineInputBorder(),
+                                                      labelStyle: TextStyle(
+                                                          color: Color(0xFF757575)
+                                                      ),
+                                                      labelText: 'Numero'
+                                                  ),
+                                                )
+
+                                            ),
+                                            Container(
+                                                width: 100,
+                                                height: 35,
+                                                margin: EdgeInsets.only(top: 5,right: 3),
+                                                child:TextFormField(
+                                                  decoration: const InputDecoration(
+                                                      contentPadding:EdgeInsets.all(5.0),
+                                                      focusedBorder: OutlineInputBorder(
+                                                          borderSide: const BorderSide (
+                                                              color: Color(0xFF3F51B5)
+                                                          )
+                                                      ),
+                                                      border: OutlineInputBorder(),
+                                                      labelStyle: TextStyle(
+                                                          color: Color(0xFF757575)
+                                                      ),
+                                                      labelText: 'Bairro'
+                                                  ),
+                                                )
+
+                                            ),Container(
+                                                width: 115,
+                                                height: 35,
+                                                margin: EdgeInsets.only(top: 3),
+                                                child:TextFormField(
+                                                  decoration: const InputDecoration(
+                                                      contentPadding:EdgeInsets.all(5.0),
+                                                      focusedBorder: OutlineInputBorder(
+                                                          borderSide: const BorderSide (
+                                                              color: Color(0xFF3F51B5)
+                                                          )
+                                                      ),
+                                                      border: OutlineInputBorder(),
+                                                      labelStyle: TextStyle(
+                                                          color: Color(0xFF757575)
+                                                      ),
+                                                      labelText: 'Cidade'
+                                                  ),
+                                                )
+
+                                            )
+                                          ],
+                                        )
+                                    ],
+                                  ),
                                 ),
                                 Container(
-                                  margin: EdgeInsets.only(bottom: 1.0,left: 10.0,right: 10.0,top: 10.0),
+                                  margin: EdgeInsets.only(bottom: 3.0,left: 10.0,right: 10.0,top: 0.0),
+                                  padding: EdgeInsets.all(5),
                                   decoration: BoxDecoration(
-                                                  border: Border.all(color: Color(0xffB0BEC5), width: 2),
+                                                  border: Border.all(color: Color(0xffB0BEC5), width: 1),
                                                   borderRadius: BorderRadius.circular(5),
                                               ),
-                                  height: 135,
+                                  height: 180,
                                   child: Column(
+
                                     children: [
                                       Container(
-                                            margin: EdgeInsets.only( bottom: 0,left: 5.0,right: 5.0,top: 5.0),
+
                                             height: 30,
                                             decoration: BoxDecoration(
                                                             color: Color(0xffECEFF1),
@@ -191,13 +399,8 @@ class Home extends StatelessWidget {
                                                             hintText: 'Buscar clientes'),
                                                   ),
                                       ),
-                                      Container(
-                                        margin: EdgeInsets.all(5.0),
-                                        decoration: BoxDecoration(
-                                                        color: Color(0xffECEFF1),
-                                                        borderRadius: BorderRadius.circular(5),
-                                                    ),
-                                        height: 85,
+                                      Flexible(
+
                                         child: SfDataGrid(
                                             headerRowHeight: 25.0,
                                             rowHeight: 25.0,
@@ -229,15 +432,15 @@ class Home extends StatelessWidget {
                                                               )
                                                   ),
                                             ],
-                                            source: RowAdapter(employeeData: [  
+                                            source: RowAdapter(employeeData: [
                                                           TD('Jéssica Malu Galvão', '21.291.366/0001-37', "Excluir"),
                                                           TD('CEL CONSULTORIA E GESTÃO EMPRESARIAL LTDA', '172.113.753-02', "Excluir"),
                                                           TD('C.C.L. GEBER E CIA LTDA', '93.155.119/0001-14', "Excluir"),
                                                           TD('Cauê Calebe Juan Nascimento', '202.764.665-51', "Excluir"),
-                                                          TD('Alícia e Rita Financeira Ltda', '48.782.145/0001-18', "Excluir"),                                         
+                                                          TD('Alícia e Rita Financeira Ltda', '48.782.145/0001-18', "Excluir"),
                                                     ]),
-                                          
-                                       
+
+
                                         ),
                                       )
                                     ],
