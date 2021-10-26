@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'Models/model_table_cliente.dart';
@@ -24,6 +25,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+       localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+         Locale('pt', 'BR'), 
+          
+        ],
         debugShowCheckedModeBanner: false,
         home: Scaffold(
             body: WindowBorder(
