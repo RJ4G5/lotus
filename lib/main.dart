@@ -20,6 +20,7 @@ void main() {
   });
 }
 
+
 const borderColor = Color(0xFF805306);
 
 class MyApp extends StatelessWidget {
@@ -261,7 +262,7 @@ class Home extends StatelessWidget {
                                                   inputFormatters: [
                                                                         TextInputMask(
                                                                             mask: ['(99) 9999-9999', '(99) 99999-9999'],
-                                                                            reverse: false)
+                                                                            reverse: false)                                                                          
                                                                       ],
                                                   decoration: const InputDecoration(
                                                       contentPadding:EdgeInsets.all(5.0),
