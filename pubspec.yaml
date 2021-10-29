@@ -32,6 +32,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   bitsdojo_window: ^0.1.1+1
   syncfusion_flutter_datagrid: ^19.2.60-beta
+  easy_mask: ^2.0.1
 
 dev_dependencies:
   flutter_test:

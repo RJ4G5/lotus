@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
+import 'package:easy_mask/easy_mask.dart';
 import 'Models/model_table_cliente.dart';
 import 'RowAdapter.dart';
 
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
        localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
+         
         ],
         supportedLocales: [
          Locale('pt', 'BR'), 
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    
     return Expanded(
         child: Container(
             decoration: BoxDecoration(color: Color(0xFF3F51B5)),
@@ -90,7 +92,13 @@ class Home extends StatelessWidget {
                       ),
 
                       child:  TextFormField(
-
+                        
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                                            TextInputMask(
+                                                mask: ['999.999.999-99', '99.999.999/9999-99'],
+                                                reverse: false)
+                                          ],
                         decoration: const InputDecoration(
                             contentPadding:EdgeInsets.all(5.0),
                             focusedBorder: OutlineInputBorder(
@@ -248,7 +256,13 @@ class Home extends StatelessWidget {
                                                 width: 140,
                                                 height: 35,
                                                 margin: EdgeInsets.only(top: 5),
+                                                
                                                 child:TextFormField(
+                                                  inputFormatters: [
+                                                                        TextInputMask(
+                                                                            mask: ['(99) 9999-9999', '(99) 99999-9999'],
+                                                                            reverse: false)
+                                                                      ],
                                                   decoration: const InputDecoration(
                                                       contentPadding:EdgeInsets.all(5.0),
                                                       focusedBorder: OutlineInputBorder(
@@ -256,6 +270,7 @@ class Home extends StatelessWidget {
                                                               color: Color(0xFF3F51B5)
                                                           )
                                                       ),
+                                                      
                                                       border: OutlineInputBorder(),
                                                       labelStyle: TextStyle(
                                                           color: Color(0xFF757575)
