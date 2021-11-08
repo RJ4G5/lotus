@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cpfcnpj/cpfcnpj.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -47,10 +48,19 @@ class MyApp extends StatelessWidget {
           );
   }
 }
+class Home extends StatefulWidget{
+  @override
+  Home_state createState() => Home_state();
+}
 
-class Home extends StatelessWidget {
+class Home_state extends State<Home>  {
+    final cpf_cnpj_controller = TextEditingController();
+    String cpf_cnpj = "";
+    double  razao_width = 100;
+    double fantazia_width = 302;
   @override
   Widget build(BuildContext context) {
+ 
     
     return Expanded(
         child: Container(
@@ -95,6 +105,25 @@ class Home extends StatelessWidget {
                       child:  TextFormField(
                         
                         keyboardType: TextInputType.number,
+                        key: Key('CNPJ_CPF'),
+                        controller: cpf_cnpj_controller,
+                        onChanged: (v) => {
+                            if(cpf_cnpj_controller.text.length > 14){                            
+                              
+                              setState((){
+                                razao_width = 200;
+                                fantazia_width = 200;
+
+                              })
+                              
+                            }else{
+                            
+                              setState((){
+                                razao_width = 100;
+                                fantazia_width = 302;
+                              })
+                            }
+                          },
                         inputFormatters: [
                                             TextInputMask(
                                                 mask: ['999.999.999-99', '99.999.999/9999-99'],
@@ -108,7 +137,6 @@ class Home extends StatelessWidget {
                                 )
                             ),
                             border: OutlineInputBorder(),
-
                             hintText: 'CNPJ/CPF'),
                       ),
                     ),
@@ -185,33 +213,41 @@ class Home extends StatelessWidget {
                                           Row(
                                             mainAxisAlignment: MainAxisAlignment.end,
                                             children:  [
-                                                Container(
-                                                    width: 200,
-                                                    height: 35,
-                                                    margin: EdgeInsets.only(right: 3),
-                                                    child:TextFormField(
-                                                            decoration: const InputDecoration(
-                                                                contentPadding:EdgeInsets.all(5.0),
-                                                                focusedBorder: OutlineInputBorder(
-                                                                    borderSide: const BorderSide (
-                                                                      color: Color(0xFF3F51B5)
-                                                                    )
-                                                                ),
-                                                                border: OutlineInputBorder(),
-                                                                labelStyle: TextStyle(
-                                                                    color: Color(0xFF757575)
-                                                                ),
-                                                                labelText: 'Nome Fantasia'
+                                              AnimatedContainer(
+                                                  width: fantazia_width,
+                                                  duration: Duration(milliseconds: 300),
+                                                  child: Container(                                                   
+                                                            height: 35,
+                                                            margin: EdgeInsets.only(right: 3),
+                                                            child:TextField(
+                                                                    decoration:  InputDecoration(
+                                                                        contentPadding: EdgeInsets.all(5.0),
+                                                                        focusedBorder: OutlineInputBorder(
+                                                                            borderSide: const BorderSide (
+                                                                              color: Color(0xFF3F51B5)
+                                                                            )
+                                                                        ),
+                                                                        border: OutlineInputBorder(),
+                                                                        labelStyle: TextStyle(
+                                                                            color: Color(0xFF757575)
+                                                                        ),
+                                                                        labelText: cpf_cnpj_controller.text.length > 14 ? "Nome Fantazia" : "Nome Completo" ,
 
-                                                            ),
-                                                          )
+                                                                    ),
+                                                                    
+                                                                  )
 
+                                                          ),
                                                 ),
-                                                Container(
-                                                    width: 200,
+                                                
+                                                AnimatedContainer(
+                                                  width: razao_width,
+                                                  duration: Duration(milliseconds: 300),
+                                                  child:Container(
+                                                 
                                                     height: 35,
-                                                    child:TextFormField(
-                                                              decoration: const InputDecoration(
+                                                    child:TextField(
+                                                              decoration:  InputDecoration(
                                                                   contentPadding:EdgeInsets.all(5.0),
                                                                   focusedBorder: OutlineInputBorder(
                                                                         borderSide: const BorderSide (
@@ -222,11 +258,18 @@ class Home extends StatelessWidget {
                                                                   labelStyle: TextStyle(
                                                                       color: Color(0xFF757575)
                                                                   ),
-                                                                  labelText: 'Razão Social'
+                                                                  labelText: cpf_cnpj_controller.text.length > 14 ? 'Razão Social' : "Nascimento"
                                                               ),
+                                                              inputFormatters: [
+                                                                                TextInputMask(
+                                                                                  mask: [cpf_cnpj_controller.text.length > 14 ? "X+" : "99/99/9999" ],
+                                                                                  reverse: false)
+                                                                                ],
                                                           )
 
                                               )
+                                                ),
+                                                
                                           ],
                                         ),
                                         Row(
