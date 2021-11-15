@@ -6,10 +6,9 @@ class FORM_CLIENTE{
 
     final   CNPJ_CPF = TextEditingController();
     final   Img = TextEditingController(); 
-    final   NomeFantazia = TextEditingController();
-    final   RazaoSocial = TextEditingController();
-    final   Nome = TextEditingController();
-    final   Nascimento = TextEditingController();
+    final   Nome_fisico_juridico = TextEditingController();
+    final   RazaoSocial_nascimento = TextEditingController();
+ 
     final   Email = TextEditingController();
     final   Telefone = TextEditingController();
     final   Cep = TextEditingController();

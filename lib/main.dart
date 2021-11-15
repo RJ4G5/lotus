@@ -103,7 +103,7 @@ class Home_state extends State<Home>  {
                           borderRadius: BorderRadius.circular(5)
                       ),
 
-                      child:  TextFormField(
+                      child:  TextField(
                         
                         keyboardType: TextInputType.number,
                         key: Key('CNPJ_CPF'),
@@ -221,6 +221,7 @@ class Home_state extends State<Home>  {
                                                             height: 35,
                                                             margin: EdgeInsets.only(right: 3),
                                                             child:TextField(
+                                                                    controller: form_cliente.Nome_fisico_juridico,
                                                                     decoration:  InputDecoration(
                                                                         contentPadding: EdgeInsets.all(5.0),
                                                                         focusedBorder: OutlineInputBorder(
@@ -248,6 +249,7 @@ class Home_state extends State<Home>  {
                                                  
                                                     height: 35,
                                                     child:TextField(
+                                                              controller: form_cliente.RazaoSocial_nascimento,
                                                               decoration:  InputDecoration(
                                                                   contentPadding:EdgeInsets.all(5.0),
                                                                   focusedBorder: OutlineInputBorder(
@@ -280,7 +282,8 @@ class Home_state extends State<Home>  {
                                                 width: 260,
                                                 height: 35,
                                                 margin: EdgeInsets.only(right: 3,top: 5),
-                                                child:TextFormField(
+                                                child:TextField(
+                                                  controller: form_cliente.Email,
                                                   decoration: const InputDecoration(
                                                       contentPadding:EdgeInsets.all(5.0),
                                                       focusedBorder: OutlineInputBorder(
@@ -302,7 +305,8 @@ class Home_state extends State<Home>  {
                                                 height: 35,
                                                 margin: EdgeInsets.only(top: 5),
                                                 
-                                                child:TextFormField(
+                                                child:TextField(
+                                                  controller: form_cliente.Telefone,
                                                   inputFormatters: [
                                                                         TextInputMask(
                                                                             mask: ['(99) 9999-9999', '(99) 99999-9999'],
@@ -334,7 +338,8 @@ class Home_state extends State<Home>  {
                                                 width: 90,
                                                 height: 35,
                                                 margin: EdgeInsets.only(right: 3,top: 5),
-                                                child:TextFormField(
+                                                child:TextField(
+                                                  controller: form_cliente.Cep,
                                                   decoration: const InputDecoration(
                                                       contentPadding:EdgeInsets.all(5.0),
                                                       focusedBorder: OutlineInputBorder(
@@ -355,7 +360,8 @@ class Home_state extends State<Home>  {
                                                 width: 200,
                                                 height: 35,
                                                 margin: EdgeInsets.only(top: 5,right: 3),
-                                                child:TextFormField(
+                                                child:TextField(
+                                                  controller: form_cliente.Numero,
                                                   decoration: const InputDecoration(
                                                       contentPadding:EdgeInsets.all(5.0),
                                                       focusedBorder: OutlineInputBorder(
@@ -376,7 +382,8 @@ class Home_state extends State<Home>  {
                                                 width: 60,
                                                 height: 35,
                                                 margin: EdgeInsets.only(top: 5,right: 3),
-                                                child:TextFormField(
+                                                child:TextField(
+                                                  controller: form_cliente.Bairro,
                                                   decoration: const InputDecoration(
                                                       contentPadding:EdgeInsets.all(5.0),
                                                       focusedBorder: OutlineInputBorder(
@@ -397,7 +404,8 @@ class Home_state extends State<Home>  {
                                                 width: 100,
                                                 height: 35,
                                                 margin: EdgeInsets.only(top: 5,right: 3),
-                                                child:TextFormField(
+                                                child:TextField(
+                                                  controller: form_cliente.Cidade,
                                                   decoration: const InputDecoration(
                                                       contentPadding:EdgeInsets.all(5.0),
                                                       focusedBorder: OutlineInputBorder(
@@ -417,7 +425,7 @@ class Home_state extends State<Home>  {
                                                 width: 115,
                                                 height: 35,
                                                 margin: EdgeInsets.only(top: 3),
-                                                child:TextFormField(
+                                                child:TextField(
                                                   decoration: const InputDecoration(
                                                       contentPadding:EdgeInsets.all(5.0),
                                                       focusedBorder: OutlineInputBorder(
@@ -457,7 +465,7 @@ class Home_state extends State<Home>  {
                                                             color: Color(0xffECEFF1),
                                                             borderRadius: BorderRadius.circular(5)
                                                         ),
-                                            child: TextFormField(
+                                            child: TextField(
                                                         decoration: const InputDecoration(
                                                             contentPadding:EdgeInsets.all(5.0),
                                                             focusedBorder: OutlineInputBorder(
