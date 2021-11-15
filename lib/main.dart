@@ -5,6 +5,7 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'Models/model_table_cliente.dart';
+import 'Models/model_form_cliente.dart';
 import 'RowAdapter.dart';
 
 void main() {
@@ -54,10 +55,10 @@ class Home extends StatefulWidget{
 }
 
 class Home_state extends State<Home>  {
-    final cpf_cnpj_controller = TextEditingController();
-    String cpf_cnpj = "";
+
+    var form_cliente = FORM_CLIENTE(); 
     double  razao_width = 100;
-    double fantazia_width = 302;
+    double  fantazia_width = 302;
   @override
   Widget build(BuildContext context) {
  
@@ -106,9 +107,9 @@ class Home_state extends State<Home>  {
                         
                         keyboardType: TextInputType.number,
                         key: Key('CNPJ_CPF'),
-                        controller: cpf_cnpj_controller,
+                        controller: form_cliente.CNPJ_CPF,
                         onChanged: (v) => {
-                            if(cpf_cnpj_controller.text.length > 14){                            
+                            if(form_cliente.CNPJ_CPF.text.length > 14){                            
                               
                               setState((){
                                 razao_width = 200;
@@ -231,7 +232,7 @@ class Home_state extends State<Home>  {
                                                                         labelStyle: TextStyle(
                                                                             color: Color(0xFF757575)
                                                                         ),
-                                                                        labelText: cpf_cnpj_controller.text.length > 14 ? "Nome Fantazia" : "Nome Completo" ,
+                                                                        labelText: form_cliente.CNPJ_CPF.text.length > 14 ? "Nome Fantazia" : "Nome Completo" ,
 
                                                                     ),
                                                                     
@@ -258,11 +259,11 @@ class Home_state extends State<Home>  {
                                                                   labelStyle: TextStyle(
                                                                       color: Color(0xFF757575)
                                                                   ),
-                                                                  labelText: cpf_cnpj_controller.text.length > 14 ? 'Razão Social' : "Nascimento"
+                                                                  labelText: form_cliente.CNPJ_CPF.text.length > 14 ? 'Razão Social' : "Nascimento"
                                                               ),
                                                               inputFormatters: [
                                                                                 TextInputMask(
-                                                                                  mask: [cpf_cnpj_controller.text.length > 14 ? "X+" : "99/99/9999" ],
+                                                                                  mask: [form_cliente.CNPJ_CPF.text.length > 14 ? "X+" : "99/99/9999" ],
                                                                                   reverse: false)
                                                                                 ],
                                                           )
