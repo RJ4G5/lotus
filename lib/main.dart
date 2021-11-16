@@ -62,7 +62,8 @@ class Home_state extends State<Home>  {
   @override
   Widget build(BuildContext context) {
  
-    
+    form_cliente.setContext(context);
+
     return Expanded(
         child: Container(
             decoration: BoxDecoration(color: Color(0xFF3F51B5)),
@@ -152,41 +153,50 @@ class Home_state extends State<Home>  {
                       ),
                       child: Row(
                         children: [
+                          Tooltip(
+                            message:'Novo',
+                            child:ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            primary: Color(0xffECEFF1),
+                                            onPrimary:Color(0xff757575),
+                                            shape: new RoundedRectangleBorder(),
+                                            fixedSize: Size(50,35),
+                                            minimumSize: Size(50,35)
+                                        ),
+                                        onPressed: () {},
+                                        child: const Icon(Icons.note_add),
+                                  )
+                          ),
+                          Tooltip(
+                            message: 'Salvar',
+                            child:ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          primary: Color(0xffECEFF1),
+                                          onPrimary:Color(0xff757575),
+                                          shape: new RoundedRectangleBorder(),
+                                          fixedSize: Size(50,35),
+                                          minimumSize: Size(50,35)
+                                      ),
+                                      onPressed: () => form_cliente.save(),
+                                      child: const Icon(Icons.save),
+                                  )
 
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                primary: Color(0xffECEFF1),
-                                onPrimary:Color(0xff757575),
-                                shape: new RoundedRectangleBorder(),
-                                fixedSize: Size(50,35),
-                                minimumSize: Size(50,35)
-                            ),
-                            onPressed: () {},
-                            child: const Icon(Icons.note_add),
                           ),
-                          ElevatedButton(
-
-                            style: ElevatedButton.styleFrom(
-                                primary: Color(0xffECEFF1),
-                                onPrimary:Color(0xff757575),
-                                shape: new RoundedRectangleBorder(),
-                                fixedSize: Size(50,35),
-                                minimumSize: Size(50,35)
-                            ),
-                            onPressed: () {},
-                            child: const Icon(Icons.save),
-                          ),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                primary: Color(0xffECEFF1),
-                                onPrimary:Color(0xff757575),
-                                shape: new RoundedRectangleBorder(),
-                                fixedSize: Size(50,35),
-                                minimumSize: Size(50,35)
-                            ),
-                            onPressed: () {},
-                            child: const Icon(Icons.delete),
-                          ),
+                          Tooltip(
+                            message:'Deletar',
+                            child: ElevatedButton(                            
+                                      style: ElevatedButton.styleFrom(
+                                          primary: Color(0xffECEFF1),
+                                          onPrimary:Color(0xff757575),
+                                          shape: new RoundedRectangleBorder(),
+                                          fixedSize: Size(50,35),
+                                          minimumSize: Size(50,35)
+                                      ),
+                                      onPressed: () {},
+                                      child: const Icon(Icons.delete),
+                                  )
+                          )
+                          ,
                         ],
                       ),
                     ),
@@ -510,13 +520,7 @@ class Home_state extends State<Home>  {
                                                               )
                                                   ),
                                             ],
-                                            source: RowAdapter(employeeData: [
-                                                          TD('Jéssica Malu Galvão', '21.291.366/0001-37', "Excluir"),
-                                                          TD('CEL CONSULTORIA E GESTÃO EMPRESARIAL LTDA', '172.113.753-02', "Excluir"),
-                                                          TD('C.C.L. GEBER E CIA LTDA', '93.155.119/0001-14', "Excluir"),
-                                                          TD('Cauê Calebe Juan Nascimento', '202.764.665-51', "Excluir"),
-                                                          TD('Alícia e Rita Financeira Ltda', '48.782.145/0001-18', "Excluir"),
-                                                    ]),
+                                            source: RowAdapter(employeeData: form_cliente.Data),
 
 
                                         ),
