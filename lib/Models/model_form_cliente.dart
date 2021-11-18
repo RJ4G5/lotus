@@ -21,17 +21,14 @@ class FORM_CLIENTE{
     final Bairro = TextEditingController();
     final Cidade = TextEditingController();
 
-    final Data = [
-                    TD('Jéssica Malu Galvão', '21.291.366/0001-37', "Excluir"),
-                    TD('CEL CONSULTORIA E GESTÃO EMPRESARIAL LTDA', '172.113.753-02', "Excluir"),
-                    TD('C.C.L. GEBER E CIA LTDA', '93.155.119/0001-14', "Excluir"),
-                    TD('Cauê Calebe Juan Nascimento', '202.764.665-51', "Excluir"),
-                    TD('Alícia e Rita Financeira Ltda', '48.782.145/0001-18', "Excluir"),
+    final DataTable = [
+                    TD( '21.291.366/0001-37','Jéssica Malu Galvão', '(31) 98883-8995'),
+                  
                  ];
 
     void save(){
 
-       this.Data.insert(0, TD('Melqui', '21.291.366/0001-37', "Excluir"));
+       this.DataTable.insert(0, TD('Melqui', '21.291.366/0001-37', "Excluir"));
   
         this.Context.state.setState(()=>{});
     

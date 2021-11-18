@@ -5,13 +5,11 @@ import 'Models/model_table_cliente.dart';
 class RowAdapter extends DataGridSource {
 
   RowAdapter({required List<TD> employeeData}) {
-    _employeeData = employeeData
-        .map<DataGridRow>((e) => DataGridRow(cells: [
-              DataGridCell<String>(columnName: 'nome', value: e.nome),
-              DataGridCell<String>(columnName: 'CNPJ/CPF', value: e.cnpjcpf),
-              DataGridCell<String>(columnName: 'acoes', value: e.acoes),
-            ]))
-        .toList();
+    _employeeData = employeeData.map<DataGridRow>((e) => DataGridRow(cells: [
+                                                                              DataGridCell<String>(columnName: 'CNPJ/CPF', value: e.cnpjcpf),
+                                                                              DataGridCell<String>(columnName: 'nome', value: e.nome),              
+                                                                              DataGridCell<String>(columnName: 'telefone', value: e.telefone),
+                                                                            ])).toList();
   }
 
   List<DataGridRow> _employeeData = [];
@@ -21,12 +19,12 @@ class RowAdapter extends DataGridSource {
 
   @override
   DataGridRowAdapter buildRow(DataGridRow row) {
+    
     return DataGridRowAdapter(
         cells: row.getCells().map<Widget>((e) {    
             return Container(
-              padding: EdgeInsets.only(left: 3),
-              width: row.getCells().indexOf(e) == 0 ? 200 : null,
-              alignment:  row.getCells().indexOf(e) == 0 ? Alignment.centerLeft : Alignment.center,
+              padding: EdgeInsets.only(left: 3),              
+              alignment:  row.getCells().indexOf(e) == 2 ? Alignment.center :Alignment.centerLeft  ,
               child: Text(e.value.toString()),
             );
     }).toList());

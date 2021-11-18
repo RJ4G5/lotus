@@ -56,7 +56,7 @@ class Home extends StatefulWidget{
 
 class Home_state extends State<Home>  {
 
-    var form_cliente = FORM_CLIENTE(); 
+    var form_cliente = FORM_CLIENTE();
     double  razao_width = 100;
     double  fantazia_width = 302;
   @override
@@ -496,31 +496,41 @@ class Home_state extends State<Home>  {
                                             gridLinesVisibility: GridLinesVisibility.both,
                                             columnWidthMode: ColumnWidthMode.fill,
                                             columns: <GridColumn>[
+                                                GridColumn(
+                                                      width: 150,
+                                                      columnName: 'CNPJ/CPF',
+                                                      label: Container(
+                                                                
+                                                                alignment: Alignment.center,
+                                                                child: Text('CNPJ/CPF')
+                                                              )
+                                                  ),
                                                   GridColumn(
                                                       columnName: 'Nome',
                                                       label: Container(
                                                                 alignment: Alignment.center,
                                                                 child: Text('Nome/Razão Social')
                                                               )
-                                                  ),
+                                                  ),                                                
                                                   GridColumn(
-                                                      columnName: 'CNPJ/CPF',
-                                                      label: Container(
-                                                                alignment: Alignment.center,
-                                                                child: Text('CNPJ/CPF')
-                                                              )
-                                                  ),
-                                                  GridColumn(
-                                                      columnName: 'acoes',
-                                                      width: 100,
+                                                      columnName: 'telefone',
+                                                      width: 150,
                                                       label: Container(
                                                                 height: 10,
                                                                 alignment: Alignment.center,
-                                                                child: Text('Ações')
+                                                                child: Text('Telefone')
                                                               )
                                                   ),
                                             ],
-                                            source: RowAdapter(employeeData: form_cliente.Data),
+                                            source: RowAdapter(employeeData: form_cliente.DataTable),                                            
+                                            onSelectionChanging: (List<DataGridRow> addedRows, List<DataGridRow> removedRows) {
+                                                                      print(addedRows[0].getCells()[0].value);
+
+                                                                      return true;
+
+                                                                    
+                                                                },
+                                           
 
 
                                         ),
