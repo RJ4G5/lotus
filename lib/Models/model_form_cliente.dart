@@ -1,7 +1,12 @@
 
+import 'dart:io';
+import 'package:hive/hive.dart';
 import 'package:flutter/material.dart';
 import './model_table_cliente.dart';
+import './model_db_cliente.dart';
 import '../main.dart';
+
+
 class FORM_CLIENTE{
 
 
@@ -20,20 +25,43 @@ class FORM_CLIENTE{
     final Numero = TextEditingController();
     final Bairro = TextEditingController();
     final Cidade = TextEditingController();
-
+    
     final DataTable = [
                     TD( '21.291.366/0001-37','Jéssica Malu Galvão', '(31) 98883-8995'),
                   
                  ];
 
-    void save(){
+    void save() async {
 
-       this.DataTable.insert(0, TD('Melqui', '21.291.366/0001-37', "Excluir"));
+      // this.DataTable.insert(0, TD('Melqui', '21.291.366/0001-37', "Excluir"));
+       var box = await  Hive.openBox('testBox');
+     
   
         this.Context.state.setState(()=>{});
-    
+
         if(this.require()){
-            print(this.CNPJ_CPF.text);
+
+              /**/
+            DB_CLIENTE cliente = await box.get(CNPJ_CPF.text);
+         
+            if(cliente == null){
+                await box.put(CNPJ_CPF.text, DB_CLIENTE(
+                        cnpjcpf: CNPJ_CPF.text,
+                        img: Img.text,
+                        nome_fisico_juridico: Nome_fisico_juridico.text,
+                        razao_social_nascimento: RazaoSocial_nascimento.text,
+                        email: Email.text,
+                        telefone: Telefone.text,
+                        cep: Cep.text,
+                        numero: Numero.text,
+                        bairro: Bairro.text,
+                        cidade: Cidade.text,
+                  ));
+            }else{
+                   print(cliente.cnpjcpf);
+                   print(cliente.nome_fisico_juridico);
+            }
+          
         }
         
     }

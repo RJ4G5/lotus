@@ -34,6 +34,7 @@ dependencies:
   syncfusion_flutter_datagrid: ^19.2.60-beta
   easy_mask: ^2.0.1
   cpfcnpj: ^1.0.3
+  hive: ^2.0.4
 
 dev_dependencies:
   flutter_test:

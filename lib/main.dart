@@ -6,11 +6,17 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'Models/model_table_cliente.dart';
 import 'Models/model_form_cliente.dart';
+import 'Adapters/Cliente_Hive_Adapter.dart';
 import 'RowAdapter.dart';
+import 'dart:io';
+import 'package:hive/hive.dart';
 
 void main() {
   runApp(MyApp());
   doWhenWindowReady(() {
+    var path = Directory.current.path;
+         Hive.init('$path/DB');   
+         Hive.registerAdapter(ClenteAdapter());  
     final win = appWindow;
     final initialSize = Size(600, 450);
     win.minSize = initialSize;
