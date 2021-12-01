@@ -1,11 +1,10 @@
 
-import 'dart:io';
 import 'package:hive/hive.dart';
 import 'package:flutter/material.dart';
 import './model_table_cliente.dart';
 import './model_db_cliente.dart';
-import '../main.dart';
-
+import 'dart:developer';
+import 'package:flutter/foundation.dart';
 
 class FORM_CLIENTE{
 
@@ -25,15 +24,28 @@ class FORM_CLIENTE{
     final Numero = TextEditingController();
     final Bairro = TextEditingController();
     final Cidade = TextEditingController();
+
     
-    final DataTable = [
-                    TD( '21.291.366/0001-37','Jéssica Malu Galvão', '(31) 98883-8995'),
-                  
-                 ];
+    final DataTable = [TD("", "", "")];
+
+
+    
+
+    void listClientes() async{
+         
+        final Box_cliente = await Hive.openBox('testBox');
+          Box_cliente.values.forEach((cliente) {            
+            this.DataTable.insert(0, cliente.toTD());
+             print(cliente.toTD());
+          });
+           this.Context.state.setState(()=>{});
+        print("object");
+           
+    }
 
     void save() async {
 
-      // this.DataTable.insert(0, TD('Melqui', '21.291.366/0001-37', "Excluir"));
+      
        var box = await  Hive.openBox('testBox');
      
   
@@ -41,32 +53,37 @@ class FORM_CLIENTE{
 
         if(this.require()){
 
-              /**/
-            DB_CLIENTE cliente = await box.get(CNPJ_CPF.text);
-         
-            if(cliente == null){
-                await box.put(CNPJ_CPF.text, DB_CLIENTE(
-                        cnpjcpf: CNPJ_CPF.text,
-                        img: Img.text,
-                        nome_fisico_juridico: Nome_fisico_juridico.text,
-                        razao_social_nascimento: RazaoSocial_nascimento.text,
-                        email: Email.text,
-                        telefone: Telefone.text,
-                        cep: Cep.text,
-                        numero: Numero.text,
-                        bairro: Bairro.text,
-                        cidade: Cidade.text,
-                  ));
+            
+            DB_CLIENTE cliente_DB = await box.get(CNPJ_CPF.text);
+
+            DB_CLIENTE new_cliente =    DB_CLIENTE(
+                                                cnpjcpf: CNPJ_CPF.text,
+                                                img: Img.text,
+                                                nome_fisico_juridico: Nome_fisico_juridico.text,
+                                                razao_social_nascimento: RazaoSocial_nascimento.text,
+                                                email: Email.text,
+                                                telefone: Telefone.text,
+                                                cep: Cep.text,
+                                                numero: Numero.text,
+                                                bairro: Bairro.text,
+                                                cidade: Cidade.text,
+                                        );
+            if(cliente_DB == null){
+
+                await box.put(CNPJ_CPF.text, new_cliente);
+                this.DataTable.insert(0, new_cliente.toTD());
+               
             }else{
-                   print(cliente.cnpjcpf);
-                   print(cliente.nome_fisico_juridico);
+                   print(cliente_DB.toTD());
+                   print(cliente_DB.nome_fisico_juridico);
             }
           
         }
         
     }
-    void delete(){
-
+    void delete() async{
+           
+           
     }
 
     bool require(){
@@ -81,8 +98,9 @@ class FORM_CLIENTE{
         return resposta;
     }
 
-    void setContext(BuildContext context){
-        this.Context = context;
+    void setContext(BuildContext context) async{
+        this.Context = await context;
+        
     }
 
     void setSnackBar(String text, Color background){

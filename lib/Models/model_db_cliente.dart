@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import './model_table_cliente.dart';
 
 
 @HiveType(typeId: 0)
@@ -46,8 +47,9 @@ class DB_CLIENTE  {
   @HiveField(9)
   String cidade;
 
-  @override
-  String toString() {
-    return "";
+  
+  TD toTD() {
+    return TD( this.cnpjcpf,this.nome_fisico_juridico, telefone);
   }
+  
 }

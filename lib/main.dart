@@ -1,3 +1,4 @@
+import 'globals.dart' as globals;
 import 'package:flutter/material.dart';
 import 'package:cpfcnpj/cpfcnpj.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -5,7 +6,7 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'Models/model_table_cliente.dart';
-import 'Models/model_form_cliente.dart';
+
 import 'Adapters/Cliente_Hive_Adapter.dart';
 import 'RowAdapter.dart';
 import 'dart:io';
@@ -16,6 +17,7 @@ void main() {
   doWhenWindowReady(() {
     var path = Directory.current.path;
          Hive.init('$path/DB');   
+   
          Hive.registerAdapter(ClenteAdapter());  
     final win = appWindow;
     final initialSize = Size(600, 450);
@@ -25,6 +27,7 @@ void main() {
     win.alignment = Alignment.center;
     win.title = "Lotus - Cadastro simples de clientes";
     win.show();
+    globals.form_cliente.listClientes();
   });
 }
 
@@ -32,6 +35,7 @@ void main() {
 const borderColor = Color(0xFF805306);
 
 class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -60,15 +64,16 @@ class Home extends StatefulWidget{
   Home_state createState() => Home_state();
 }
 
-class Home_state extends State<Home>  {
+class Home_state extends State<Home>  {   
+    
 
-    var form_cliente = FORM_CLIENTE();
     double  razao_width = 100;
     double  fantazia_width = 302;
   @override
   Widget build(BuildContext context) {
- 
-    form_cliente.setContext(context);
+    
+    globals.form_cliente.setContext(context);
+    //globals.form_cliente.listClientes();
 
     return Expanded(
         child: Container(
@@ -114,9 +119,9 @@ class Home_state extends State<Home>  {
                         
                         keyboardType: TextInputType.number,
                         key: Key('CNPJ_CPF'),
-                        controller: form_cliente.CNPJ_CPF,
+                        controller: globals.form_cliente.CNPJ_CPF,
                         onChanged: (v) => {
-                            if(form_cliente.CNPJ_CPF.text.length > 14){                            
+                            if(globals.form_cliente.CNPJ_CPF.text.length > 14){                            
                               
                               setState((){
                                 razao_width = 200;
@@ -183,7 +188,7 @@ class Home_state extends State<Home>  {
                                           fixedSize: Size(50,35),
                                           minimumSize: Size(50,35)
                                       ),
-                                      onPressed: () => form_cliente.save(),
+                                      onPressed: () => globals.form_cliente.save(),
                                       child: const Icon(Icons.save),
                                   )
 
@@ -198,7 +203,7 @@ class Home_state extends State<Home>  {
                                           fixedSize: Size(50,35),
                                           minimumSize: Size(50,35)
                                       ),
-                                      onPressed: () {},
+                                      onPressed: () => globals.form_cliente.listClientes(),
                                       child: const Icon(Icons.delete),
                                   )
                           )
@@ -237,7 +242,7 @@ class Home_state extends State<Home>  {
                                                             height: 35,
                                                             margin: EdgeInsets.only(right: 3),
                                                             child:TextField(
-                                                                    controller: form_cliente.Nome_fisico_juridico,
+                                                                    controller: globals.form_cliente.Nome_fisico_juridico,
                                                                     decoration:  InputDecoration(
                                                                         contentPadding: EdgeInsets.all(5.0),
                                                                         focusedBorder: OutlineInputBorder(
@@ -249,7 +254,7 @@ class Home_state extends State<Home>  {
                                                                         labelStyle: TextStyle(
                                                                             color: Color(0xFF757575)
                                                                         ),
-                                                                        labelText: form_cliente.CNPJ_CPF.text.length > 14 ? "Nome Fantazia" : "Nome Completo" ,
+                                                                        labelText: globals.form_cliente.CNPJ_CPF.text.length > 14 ? "Nome Fantazia" : "Nome Completo" ,
 
                                                                     ),
                                                                     
@@ -265,7 +270,7 @@ class Home_state extends State<Home>  {
                                                  
                                                     height: 35,
                                                     child:TextField(
-                                                              controller: form_cliente.RazaoSocial_nascimento,
+                                                              controller: globals.form_cliente.RazaoSocial_nascimento,
                                                               decoration:  InputDecoration(
                                                                   contentPadding:EdgeInsets.all(5.0),
                                                                   focusedBorder: OutlineInputBorder(
@@ -277,11 +282,11 @@ class Home_state extends State<Home>  {
                                                                   labelStyle: TextStyle(
                                                                       color: Color(0xFF757575)
                                                                   ),
-                                                                  labelText: form_cliente.CNPJ_CPF.text.length > 14 ? 'Razão Social' : "Nascimento"
+                                                                  labelText: globals.form_cliente.CNPJ_CPF.text.length > 14 ? 'Razão Social' : "Nascimento"
                                                               ),
                                                               inputFormatters: [
                                                                                 TextInputMask(
-                                                                                  mask: [form_cliente.CNPJ_CPF.text.length > 14 ? "X+" : "99/99/9999" ],
+                                                                                  mask: [globals.form_cliente.CNPJ_CPF.text.length > 14 ? "X+" : "99/99/9999" ],
                                                                                   reverse: false)
                                                                                 ],
                                                           )
@@ -299,7 +304,7 @@ class Home_state extends State<Home>  {
                                                 height: 35,
                                                 margin: EdgeInsets.only(right: 3,top: 5),
                                                 child:TextField(
-                                                  controller: form_cliente.Email,
+                                                  controller: globals.form_cliente.Email,
                                                   decoration: const InputDecoration(
                                                       contentPadding:EdgeInsets.all(5.0),
                                                       focusedBorder: OutlineInputBorder(
@@ -322,7 +327,7 @@ class Home_state extends State<Home>  {
                                                 margin: EdgeInsets.only(top: 5),
                                                 
                                                 child:TextField(
-                                                  controller: form_cliente.Telefone,
+                                                  controller: globals.form_cliente.Telefone,
                                                   inputFormatters: [
                                                                         TextInputMask(
                                                                             mask: ['(99) 9999-9999', '(99) 99999-9999'],
@@ -355,7 +360,7 @@ class Home_state extends State<Home>  {
                                                 height: 35,
                                                 margin: EdgeInsets.only(right: 3,top: 5),
                                                 child:TextField(
-                                                  controller: form_cliente.Cep,
+                                                  controller: globals.form_cliente.Cep,
                                                   decoration: const InputDecoration(
                                                       contentPadding:EdgeInsets.all(5.0),
                                                       focusedBorder: OutlineInputBorder(
@@ -377,7 +382,7 @@ class Home_state extends State<Home>  {
                                                 height: 35,
                                                 margin: EdgeInsets.only(top: 5,right: 3),
                                                 child:TextField(
-                                                  controller: form_cliente.Numero,
+                                                  controller: globals.form_cliente.Numero,
                                                   decoration: const InputDecoration(
                                                       contentPadding:EdgeInsets.all(5.0),
                                                       focusedBorder: OutlineInputBorder(
@@ -399,7 +404,7 @@ class Home_state extends State<Home>  {
                                                 height: 35,
                                                 margin: EdgeInsets.only(top: 5,right: 3),
                                                 child:TextField(
-                                                  controller: form_cliente.Bairro,
+                                                  controller: globals.form_cliente.Bairro,
                                                   decoration: const InputDecoration(
                                                       contentPadding:EdgeInsets.all(5.0),
                                                       focusedBorder: OutlineInputBorder(
@@ -421,7 +426,7 @@ class Home_state extends State<Home>  {
                                                 height: 35,
                                                 margin: EdgeInsets.only(top: 5,right: 3),
                                                 child:TextField(
-                                                  controller: form_cliente.Cidade,
+                                                  controller: globals.form_cliente.Cidade,
                                                   decoration: const InputDecoration(
                                                       contentPadding:EdgeInsets.all(5.0),
                                                       focusedBorder: OutlineInputBorder(
@@ -528,7 +533,7 @@ class Home_state extends State<Home>  {
                                                               )
                                                   ),
                                             ],
-                                            source: RowAdapter(employeeData: form_cliente.DataTable),                                            
+                                            source: RowAdapter(employeeData: globals.form_cliente.DataTable),                                            
                                             onSelectionChanging: (List<DataGridRow> addedRows, List<DataGridRow> removedRows) {
                                                                       print(addedRows[0].getCells()[0].value);
 
