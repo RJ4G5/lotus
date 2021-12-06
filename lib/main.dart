@@ -67,10 +67,10 @@ class Home extends StatefulWidget{
 class Home_state extends State<Home>  {   
     
 
-    double  razao_width = 100;
-    double  fantazia_width = 302;
+  
   @override
   Widget build(BuildContext context) {
+    
     
     globals.form_cliente.setContext(context);
     //globals.form_cliente.listClientes();
@@ -119,23 +119,14 @@ class Home_state extends State<Home>  {
                         
                         keyboardType: TextInputType.number,
                         key: Key('CNPJ_CPF'),
+                        enabled: globals.CNPJ_CPF_enabled,
                         controller: globals.form_cliente.CNPJ_CPF,
+                        
                         onChanged: (v) => {
-                            if(globals.form_cliente.CNPJ_CPF.text.length > 14){                            
-                              
-                              setState((){
-                                razao_width = 200;
-                                fantazia_width = 200;
-
-                              })
-                              
-                            }else{
-                            
-                              setState((){
-                                razao_width = 100;
-                                fantazia_width = 302;
-                              })
-                            }
+                            if(globals.form_cliente.CNPJ_CPF.text.length > 14)                           
+                              globals.form_cliente.activeForm("CNPJ")                           
+                            else
+                              globals.form_cliente.activeForm("CPF")                             
                           },
                         inputFormatters: [
                                             TextInputMask(
@@ -174,7 +165,7 @@ class Home_state extends State<Home>  {
                                             fixedSize: Size(50,35),
                                             minimumSize: Size(50,35)
                                         ),
-                                        onPressed: () {},
+                                        onPressed: globals.form_cliente.clearForm,
                                         child: const Icon(Icons.note_add),
                                   )
                           ),
@@ -236,7 +227,7 @@ class Home_state extends State<Home>  {
                                             mainAxisAlignment: MainAxisAlignment.end,
                                             children:  [
                                               AnimatedContainer(
-                                                  width: fantazia_width,
+                                                  width: globals.fantazia_width,
                                                   duration: Duration(milliseconds: 300),
                                                   child: Container(                                                   
                                                             height: 35,
@@ -264,7 +255,7 @@ class Home_state extends State<Home>  {
                                                 ),
                                                 
                                                 AnimatedContainer(
-                                                  width: razao_width,
+                                                  width: globals.razao_width,
                                                   duration: Duration(milliseconds: 300),
                                                   child:Container(
                                                  
@@ -382,7 +373,7 @@ class Home_state extends State<Home>  {
                                                 height: 35,
                                                 margin: EdgeInsets.only(top: 5,right: 3),
                                                 child:TextField(
-                                                  controller: globals.form_cliente.Numero,
+                                                  controller: globals.form_cliente.Endereco,
                                                   decoration: const InputDecoration(
                                                       contentPadding:EdgeInsets.all(5.0),
                                                       focusedBorder: OutlineInputBorder(
@@ -404,7 +395,7 @@ class Home_state extends State<Home>  {
                                                 height: 35,
                                                 margin: EdgeInsets.only(top: 5,right: 3),
                                                 child:TextField(
-                                                  controller: globals.form_cliente.Bairro,
+                                                  controller: globals.form_cliente.Numero,
                                                   decoration: const InputDecoration(
                                                       contentPadding:EdgeInsets.all(5.0),
                                                       focusedBorder: OutlineInputBorder(
@@ -426,7 +417,7 @@ class Home_state extends State<Home>  {
                                                 height: 35,
                                                 margin: EdgeInsets.only(top: 5,right: 3),
                                                 child:TextField(
-                                                  controller: globals.form_cliente.Cidade,
+                                                  controller: globals.form_cliente.Bairro,
                                                   decoration: const InputDecoration(
                                                       contentPadding:EdgeInsets.all(5.0),
                                                       focusedBorder: OutlineInputBorder(
@@ -447,6 +438,7 @@ class Home_state extends State<Home>  {
                                                 height: 35,
                                                 margin: EdgeInsets.only(top: 3),
                                                 child:TextField(
+                                                  controller: globals.form_cliente.Cidade,
                                                   decoration: const InputDecoration(
                                                       contentPadding:EdgeInsets.all(5.0),
                                                       focusedBorder: OutlineInputBorder(
@@ -503,7 +495,7 @@ class Home_state extends State<Home>  {
                                         child: SfDataGrid(
                                             headerRowHeight: 25.0,
                                             rowHeight: 25.0,
-                                            selectionMode: SelectionMode.single,
+                                            selectionMode: SelectionMode.multiple,
                                             gridLinesVisibility: GridLinesVisibility.both,
                                             columnWidthMode: ColumnWidthMode.fill,
                                             columns: <GridColumn>[
@@ -533,16 +525,15 @@ class Home_state extends State<Home>  {
                                                               )
                                                   ),
                                             ],
-                                            source: RowAdapter(employeeData: globals.form_cliente.DataTable),                                            
+                                            source: RowAdapter(employeeData: globals.form_cliente.DataTable),                                                                                      
                                             onSelectionChanging: (List<DataGridRow> addedRows, List<DataGridRow> removedRows) {
-                                                                      print(addedRows[0].getCells()[0].value);
+                                                                                                                                          
+                                                                      globals.form_cliente.getCliente(addedRows[0].getCells()[0].value);
 
                                                                       return true;
 
                                                                     
-                                                                },
-                                           
-
+                                                                },   
 
                                         ),
                                       )

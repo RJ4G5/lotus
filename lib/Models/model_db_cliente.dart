@@ -12,6 +12,7 @@ class DB_CLIENTE  {
         this.email = "",
         this.telefone = "",
         this.cep = "",
+        this.endereco = "",
         this.numero = "",
         this.bairro = "",
         this.cidade= ""
@@ -37,19 +38,22 @@ class DB_CLIENTE  {
    
   @HiveField(6)
   String cep;
-   
+
   @HiveField(7)
-  String numero;
+  String endereco;
    
   @HiveField(8)
-  String bairro;
+  String numero;
    
   @HiveField(9)
+  String bairro;
+   
+  @HiveField(10)
   String cidade;
 
   
   TD toTD() {
-    return TD( this.cnpjcpf,this.nome_fisico_juridico, telefone);
+    return TD( this.cnpjcpf, this.cnpjcpf.length > 14 ? this.razao_social_nascimento : this.nome_fisico_juridico , telefone);
   }
   
 }
