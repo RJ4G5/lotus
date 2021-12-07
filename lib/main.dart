@@ -194,7 +194,7 @@ class Home_state extends State<Home>  {
                                           fixedSize: Size(50,35),
                                           minimumSize: Size(50,35)
                                       ),
-                                      onPressed: () => globals.form_cliente.listClientes(),
+                                      onPressed: () => globals.form_cliente.delete(),
                                       child: const Icon(Icons.delete),
                                   )
                           )

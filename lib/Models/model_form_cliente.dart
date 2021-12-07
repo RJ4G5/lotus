@@ -58,10 +58,12 @@ class FORM_CLIENTE {
         await box.put(CNPJ_CPF.text, new_cliente);
         this.DataTable.insert(0, new_cliente.toTD());
         this.clearForm();
+        this.setSnackBar('Salvo!', Color(0xFF388E3C));
       } else {
         await box.put(CNPJ_CPF.text, new_cliente);
         this.DataTable[globals.tableIndexSelected] = new_cliente.toTD();
         this.clearForm();
+        this.setSnackBar('Atualizado!', Color(0xFF388E3C));
       }
     }
   }
@@ -81,8 +83,15 @@ class FORM_CLIENTE {
     this.Context.state.setState(() => {});
   }
 
-  void delete() async {}
-
+  void delete() async {
+    var box = await Hive.openBox('testBox');
+    TD td = this.DataTable[globals.tableIndexSelected];
+    box.delete(td.cnpjcpf).then((value) => {
+          this.DataTable.remove(td),
+          this.clearForm(),
+          this.setSnackBar('Removido com sucesso!', Color(0xFF388E3C))
+        });
+  }
 
   void getCliente(String key) async {
     final DB = await Hive.openBox('testBox');
@@ -99,9 +108,9 @@ class FORM_CLIENTE {
     this.Bairro.text = cliente.bairro;
     this.Cidade.text = cliente.cidade;
 
-    globals.tableIndexSelected =  this.DataTable.indexWhere(((td) => td.cnpjcpf == cliente.cnpjcpf)); 
+    globals.tableIndexSelected =
+        this.DataTable.indexWhere(((td) => td.cnpjcpf == cliente.cnpjcpf));
     globals.CNPJ_CPF_enabled = false;
- 
 
     if (key.length > 14)
       this.activeForm("CNPJ");
