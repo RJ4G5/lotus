@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:cpfcnpj/cpfcnpj.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
-import 'package:syncfusion_flutter_datagrid/datagrid.dart';
+
 import 'package:easy_mask/easy_mask.dart';
-import 'Models/model_table_cliente.dart';
+
 
 import 'Adapters/Cliente_Hive_Adapter.dart';
-import 'RowAdapter.dart';
+
 import 'dart:io';
 import 'package:hive/hive.dart';
 
@@ -490,52 +490,47 @@ class Home_state extends State<Home>  {
                                                             hintText: 'Buscar clientes'),
                                                   ),
                                       ),
-                                      Flexible(
+                                      SizedBox(
+                                        width: double.infinity,
+                                        child: DataTable(
+                                                  showCheckboxColumn: false,
+                                                  headingRowHeight: 30,
+                                                  dataRowHeight: 25,
+                                                  
+                                                  showBottomBorder: true,
 
-                                        child: SfDataGrid(
-                                            headerRowHeight: 25.0,
-                                            rowHeight: 25.0,
-                                            selectionMode: SelectionMode.multiple,
-                                            gridLinesVisibility: GridLinesVisibility.both,
-                                            columnWidthMode: ColumnWidthMode.fill,
-                                            columns: <GridColumn>[
-                                                GridColumn(
-                                                      width: 150,
-                                                      columnName: 'CNPJ/CPF',
-                                                      label: Container(
-                                                                
-                                                                alignment: Alignment.center,
-                                                                child: Text('CNPJ/CPF')
-                                                              )
-                                                  ),
-                                                  GridColumn(
-                                                      columnName: 'Nome',
-                                                      label: Container(
-                                                                alignment: Alignment.center,
-                                                                child: Text('Nome/Razão Social')
-                                                              )
-                                                  ),                                                
-                                                  GridColumn(
-                                                      columnName: 'telefone',
-                                                      width: 150,
-                                                      label: Container(
-                                                                height: 10,
-                                                                alignment: Alignment.center,
-                                                                child: Text('Telefone')
-                                                              )
-                                                  ),
-                                            ],
-                                            source: RowAdapter(employeeData: globals.form_cliente.DataTable),                                                                                      
-                                            onSelectionChanging: (List<DataGridRow> addedRows, List<DataGridRow> removedRows) {
-                                                                                                                                          
-                                                                      globals.form_cliente.getCliente(addedRows[0].getCells()[0].value);
-
-                                                                      return true;
-
-                                                                    
-                                                                },   
-
-                                        ),
+                                                  columns: [
+                                                    DataColumn(
+                                                      label: Text("CPF/CNPJ"),
+                                                      numeric: false,
+                                                      ),
+                                                      DataColumn(
+                                                      label: Text("NOME/RAZÃO SOCIAL"),
+                                                      numeric: false,
+                                                      ),
+                                                      DataColumn(
+                                                      label: Text("TELEFONE"),
+                                                      numeric: false,
+                                                      ),
+                                                  ],
+                                                  rows: globals.form_cliente.DataTable.map((e) => DataRow(
+                                                          onSelectChanged: (value) {
+                                                            globals.form_cliente.getCliente(e.cnpjcpf);
+                                                          },
+                                                          cells: [
+                                                            DataCell(                                                              
+                                                              Text(e.cnpjcpf),                                                              
+                                                            ),
+                                                            DataCell(
+                                                              Text(e.nome)
+                                                            ),
+                                                            DataCell(
+                                                              Text(e.telefone)
+                                                            ),
+                                                          ]
+                                                    )).toList(),
+                                          )
+                                        
                                       )
                                     ],
                                   ),

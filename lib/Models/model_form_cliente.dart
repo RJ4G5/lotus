@@ -22,7 +22,7 @@ class FORM_CLIENTE {
   final Bairro = TextEditingController();
   final Cidade = TextEditingController();
 
-  final DataTable = [TD("", "", "")];
+  final DataTable = [];
 
   void listClientes() async {
     Hive.openBox('testBox').then((db) => {
@@ -80,6 +80,7 @@ class FORM_CLIENTE {
     this.Bairro.clear();
     this.Cidade.clear();
     globals.CNPJ_CPF_enabled = true;
+    globals.tableIndexSelected = -1;
     this.Context.state.setState(() => {});
   }
 
