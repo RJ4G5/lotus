@@ -16,6 +16,7 @@ class ClenteAdapter extends TypeAdapter<DB_CLIENTE> {
         email: reader.readString(),
         telefone: reader.readString(),
         cep: reader.readString(),
+        endereco: reader.readString(),
         numero: reader.readString(),
         bairro: reader.readString(),
         cidade: reader.readString(),
@@ -32,6 +33,7 @@ class ClenteAdapter extends TypeAdapter<DB_CLIENTE> {
     writer.writeString(obj.email);
     writer.writeString(obj.telefone);
     writer.writeString(obj.cep);
+    writer.writeString(obj.endereco);
     writer.writeString(obj.numero);
     writer.writeString(obj.bairro);
     writer.writeString(obj.cidade);

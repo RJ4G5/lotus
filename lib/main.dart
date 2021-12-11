@@ -352,6 +352,11 @@ class Home_state extends State<Home>  {
                                                 margin: EdgeInsets.only(right: 3,top: 5),
                                                 child:TextField(
                                                   controller: globals.form_cliente.Cep,
+                                                  inputFormatters: [
+                                                                    TextInputMask(
+                                                                        mask: ['99999-999'],
+                                                                        reverse: false)                                                                          
+                                                                    ],
                                                   decoration: const InputDecoration(
                                                       contentPadding:EdgeInsets.all(5.0),
                                                       focusedBorder: OutlineInputBorder(
@@ -479,6 +484,8 @@ class Home_state extends State<Home>  {
                                                             borderRadius: BorderRadius.circular(5)
                                                         ),
                                             child: TextField(
+                                                        onChanged: globals.form_cliente.search,                                                       
+                                                        
                                                         decoration: const InputDecoration(
                                                             contentPadding:EdgeInsets.all(5.0),
                                                             focusedBorder: OutlineInputBorder(
@@ -505,11 +512,11 @@ class Home_state extends State<Home>  {
                                                       numeric: false,
                                                       ),
                                                       DataColumn(
-                                                      label: Text("NOME/RAZÃO SOCIAL"),
+                                                      label: Text("NOME/RAZÃO SOCIAL"),                                                              
                                                       numeric: false,
                                                       ),
-                                                      DataColumn(
-                                                      label: Text("TELEFONE"),
+                                                      DataColumn(                                                      
+                                                      label: Text('TELEFONE'),
                                                       numeric: false,
                                                       ),
                                                   ],
@@ -522,9 +529,20 @@ class Home_state extends State<Home>  {
                                                               Text(e.cnpjcpf),                                                              
                                                             ),
                                                             DataCell(
-                                                              Text(e.nome)
+                                                              Tooltip(
+                                                                      message: e.nome,
+                                                                      child: Container(
+                                                                                width: 150,
+                                                                                child: Text(
+                                                                                            e.nome,
+                                                                                            maxLines: 1,
+                                                                                            overflow: TextOverflow.ellipsis,
+                                                                                            softWrap: true,
+                                                                                          ),
+                                                                              )
+                                                                      )
                                                             ),
-                                                            DataCell(
+                                                            DataCell(                                                              
                                                               Text(e.telefone)
                                                             ),
                                                           ]

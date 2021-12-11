@@ -41,7 +41,7 @@ class FORM_CLIENTE {
     if (this.require()) {
       DB_CLIENTE cliente_DB = await box.get(CNPJ_CPF.text);
 
-      DB_CLIENTE new_cliente = DB_CLIENTE(
+      DB_CLIENTE new_cliente = await DB_CLIENTE(
         cnpjcpf: CNPJ_CPF.text,
         img: Img.text,
         nome_fisico_juridico: Nome_fisico_juridico.text,
@@ -148,8 +148,37 @@ class FORM_CLIENTE {
     return resposta;
   }
 
+  void search(e) {
+    Hive.openBox('testBox').then((db) => {
+          this.DataTable.clear(),
+          db.values.forEach((cliente) {
+            if (this.removeAcent(cliente.toString()).contains(e.toLowerCase())) {
+           
+           
+              this.DataTable.insert(0, cliente.toTD());
+            }
+          }),
+          this.Context.state.setState(() => {})
+        });
+  }
+
   void setContext(BuildContext context) async {
     this.Context = await context;
+  }
+
+  String removeAcent(String frase) {
+    var acentos = 'áàãâéêíóôõúüçÁÀÃÂÉÊÍÓÔÕÚÜÇ'.split("");
+    var s_acentos = "aeeiooouucAAAAEEIOOOUUC".split("");
+    var a = frase.split("");
+    a.asMap().forEach((index_a,letra) => {
+          acentos.asMap().forEach((index_acentos, acento) {
+            if (letra == acento) {              
+              a[index_a] = s_acentos[index_acentos];
+            }
+          })
+        });
+    
+    return a.join();
   }
 
   void setSnackBar(String text, Color background) {

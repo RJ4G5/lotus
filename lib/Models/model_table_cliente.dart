@@ -3,5 +3,5 @@ class TD {
 
   final String cnpjcpf;
   final String nome;
-  final String telefone;
+  final String telefone;  
 }
