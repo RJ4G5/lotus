@@ -1,4 +1,6 @@
 import 'globals.dart' as globals;
+import 'dart:io';
+import 'package:hive/hive.dart';
 import 'package:flutter/material.dart';
 import 'package:cpfcnpj/cpfcnpj.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -9,13 +11,13 @@ import 'package:easy_mask/easy_mask.dart';
 
 import 'Adapters/Cliente_Hive_Adapter.dart';
 
-import 'dart:io';
-import 'package:hive/hive.dart';
+
 
 void main() {
   runApp(MyApp());
   doWhenWindowReady(() {
-    var path = Directory.current.path;
+    var path =  Directory .current.path;
+        print(Directory.current.parent);
          Hive.init('$path/DB');   
    
          Hive.registerAdapter(ClenteAdapter());  
@@ -557,11 +559,11 @@ class Home_state extends State<Home>  {
                                     "Criado por Melquizedeque S. Lobo     V 1.0")
                               ],
                             ),
-                            Positioned(
-                              child: Container(
-                                          padding: EdgeInsets.all(10.0),
-                                          margin: EdgeInsets.only(left: 48.0, top: 0),
-                                          transform: Matrix4.translationValues(0.0, -50.0, 0.0),
+                            
+                               Container(
+                                          padding: EdgeInsets.all(35.0),
+                                         // margin: EdgeInsets.only(left: 48.0, top: 0),
+                                          transform: Matrix4.translationValues(48.0, -50.0, 0.0),
                                           width: 120,
                                           height: 120,
                                           decoration: BoxDecoration(
@@ -573,8 +575,78 @@ class Home_state extends State<Home>  {
                                                           //    image: AssetImage('images/profile.png'),
                                                           //    ),
                                                       ),
-                                      ),
-                            )
+                                          child:  Container(  
+                                                      transform: Matrix4.translationValues(50.0, 40.0, 0.0),
+                                                      
+                                                      decoration: BoxDecoration(                                                          
+                                                                shape: BoxShape.circle,
+                                                                color: Colors.white,
+                                                                boxShadow: [
+                                                                  BoxShadow(
+                                                                    color: Colors.grey.withOpacity(0.5),
+                                                                    spreadRadius: 5,
+                                                                    blurRadius: 7,
+                                                                    offset: Offset(0, 3), 
+                                                                  ),
+                                                                ],
+                                                                
+                                                            ), 
+                                                      
+                                                      
+                                                      child:  PopupMenuButton(
+                                                                  icon: Icon(Icons.camera_alt_sharp, color:  Color(0xff757575),),     
+                            
+                                                                  itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+                                                                     PopupMenuItem(
+                                                                            padding: EdgeInsets.all(10),
+                                                                            height: 18,                                                                       
+                                                                            child:  Row(                                                                         
+                                                                                        children: [
+                                                                                            Icon(Icons.computer, color: Color(0xff757575)),
+                                                                                            Padding(
+                                                                                              padding: EdgeInsets.only(left: 10),
+                                                                                              child:Text('Selecionar',                                                                             
+                                                                                                        style: TextStyle(
+                                                                                                                  color: Color(0xff757575),                                                                                
+                                                                                                                ),
+                                                                                                  ) 
+                                                                                              )
+                                                                                            
+                                                                                        ]),
+                                                                              onTap: globals.form_cliente.selectImagem,
+                                                                      ),
+                                                                   
+                                                                      PopupMenuItem(                                                                      
+                                                                            padding: EdgeInsets.all(10),
+                                                                            
+                                                                            height: 18,                                                                       
+                                                                            child:  Row(                                                                         
+                                                                                        children: [
+                                                                                            Icon(Icons.delete, color: Color(0xff757575)),
+                                                                                            
+                                                                                            Padding(
+                                                                                              padding: EdgeInsets.only(left:  10),
+                                                                                              child:Text('Remover',                                                                                                                                                               
+                                                                                                  style: TextStyle(
+                                                                                                            color: Color(0xff757575),                                                                                                        
+                                                                                                                                                                                        
+                                                                                                          ),
+                                                                                                ),)
+                                                                                            
+                                                                                        ]),
+                                                                              onTap: () => print("remover"),
+                                                                        ),
+                                                                       
+                                                                                                                                                                                     
+                                                                    
+                                                                  ],
+                                                                ),
+                                                )
+                                          )
+                                          
+                                          
+                                    
+                           
                           ],
                         ),
                       ],

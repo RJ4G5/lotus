@@ -1,10 +1,11 @@
+import 'dart:io';
+
 import '../../globals.dart' as globals;
 import 'package:hive/hive.dart';
 import 'package:flutter/material.dart';
 import './model_table_cliente.dart';
 import './model_db_cliente.dart';
-import 'dart:developer';
-import 'package:flutter/foundation.dart';
+
 
 class FORM_CLIENTE {
   var Context;
@@ -152,9 +153,9 @@ class FORM_CLIENTE {
     Hive.openBox('testBox').then((db) => {
           this.DataTable.clear(),
           db.values.forEach((cliente) {
-            if (this.removeAcent(cliente.toString()).contains(e.toLowerCase())) {
-           
-           
+            if (this
+                .removeAcent(cliente.toString())
+                .contains(e.toLowerCase())) {
               this.DataTable.insert(0, cliente.toTD());
             }
           }),
@@ -170,15 +171,19 @@ class FORM_CLIENTE {
     var acentos = 'áàãâéêíóôõúüçÁÀÃÂÉÊÍÓÔÕÚÜÇ'.split("");
     var s_acentos = "aeeiooouucAAAAEEIOOOUUC".split("");
     var a = frase.split("");
-    a.asMap().forEach((index_a,letra) => {
+    a.asMap().forEach((index_a, letra) => {
           acentos.asMap().forEach((index_acentos, acento) {
-            if (letra == acento) {              
+            if (letra == acento) {
               a[index_a] = s_acentos[index_acentos];
             }
           })
         });
-    
+
     return a.join();
+  }
+
+  void selectImagem() async {
+
   }
 
   void setSnackBar(String text, Color background) {
