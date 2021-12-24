@@ -1,17 +1,22 @@
 import 'dart:io';
+import 'dart:convert';
+import 'dart:typed_data';
 
+import 'package:image/image.dart' as IMG;
 import '../../globals.dart' as globals;
 import 'package:hive/hive.dart';
 import 'package:flutter/material.dart';
 import './model_table_cliente.dart';
 import './model_db_cliente.dart';
+import 'package:file_picker/file_picker.dart';
 
 
 class FORM_CLIENTE {
   var Context;
 
   final CNPJ_CPF = TextEditingController();
-  final Img = TextEditingController();
+
+  final ImgBase64 = TextEditingController();
   final Nome_fisico_juridico = TextEditingController();
   final RazaoSocial_nascimento = TextEditingController();
 
@@ -24,6 +29,8 @@ class FORM_CLIENTE {
   final Cidade = TextEditingController();
 
   final DataTable = [];
+
+
 
   void listClientes() async {
     Hive.openBox('testBox').then((db) => {
@@ -44,7 +51,7 @@ class FORM_CLIENTE {
 
       DB_CLIENTE new_cliente = await DB_CLIENTE(
         cnpjcpf: CNPJ_CPF.text,
-        img: Img.text,
+        img: ImgBase64.text,
         nome_fisico_juridico: Nome_fisico_juridico.text,
         razao_social_nascimento: RazaoSocial_nascimento.text,
         email: Email.text,
@@ -57,11 +64,14 @@ class FORM_CLIENTE {
       );
       if (cliente_DB == null) {
         await box.put(CNPJ_CPF.text, new_cliente);
+        box.close();
+        
         this.DataTable.insert(0, new_cliente.toTD());
         this.clearForm();
         this.setSnackBar('Salvo!', Color(0xFF388E3C));
       } else {
         await box.put(CNPJ_CPF.text, new_cliente);
+        box.close();
         this.DataTable[globals.tableIndexSelected] = new_cliente.toTD();
         this.clearForm();
         this.setSnackBar('Atualizado!', Color(0xFF388E3C));
@@ -90,6 +100,7 @@ class FORM_CLIENTE {
     TD td = this.DataTable[globals.tableIndexSelected];
     box.delete(td.cnpjcpf).then((value) => {
           this.DataTable.remove(td),
+          box.close(),
           this.clearForm(),
           this.setSnackBar('Removido com sucesso!', Color(0xFF388E3C))
         });
@@ -113,12 +124,15 @@ class FORM_CLIENTE {
     globals.tableIndexSelected =
         this.DataTable.indexWhere(((td) => td.cnpjcpf == cliente.cnpjcpf));
     globals.CNPJ_CPF_enabled = false;
+    
+    DB.close();
 
     if (key.length > 14)
       this.activeForm("CNPJ");
     else
       this.activeForm("CPF");
   }
+
 
   void activeForm(String key) {
     switch (key) {
@@ -153,13 +167,12 @@ class FORM_CLIENTE {
     Hive.openBox('testBox').then((db) => {
           this.DataTable.clear(),
           db.values.forEach((cliente) {
-            if (this
-                .removeAcent(cliente.toString())
-                .contains(e.toLowerCase())) {
+            if (this.removeAcent(cliente.toString()).contains(e.toLowerCase())) {
               this.DataTable.insert(0, cliente.toTD());
             }
           }),
-          this.Context.state.setState(() => {})
+          this.Context.state.setState(() => {}),
+          db.close()
         });
   }
 
@@ -183,7 +196,36 @@ class FORM_CLIENTE {
   }
 
   void selectImagem() async {
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['jpg','png','jpeg'],
+      );
+      if (result != null) {
+          File file = File(result.files.first.path.toString());
+          var image = IMG.decodeImage(file.readAsBytesSync())!;
+ 
+          var thumbnail = IMG.copyResize(image, width: 200);         
+          this.ImgBase64.text =  base64.encode(IMG.encodeJpg(thumbnail));  
+          this.Context.state.setState(() => {}); 
+      }
+      
+  }
+  getImagemPerfil(){
+      return MemoryImage(Base64Decoder().convert(this.ImgBase64.text));
+  }
 
+  
+
+  String setPathExc(String path) {
+      final DB =  Hive.openBox('config');
+      DB.then((conn) => conn.put("path", path));   
+      return path;
+  }
+
+  String getPathExc(){
+    final DB =  Hive.openBox('config');
+     return DB.then((conn) => conn.get("path")).toString();   
+      
   }
 
   void setSnackBar(String text, Color background) {

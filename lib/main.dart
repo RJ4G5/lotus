@@ -1,11 +1,12 @@
 import 'globals.dart' as globals;
 import 'dart:io';
+import 'dart:convert';
 import 'package:hive/hive.dart';
 import 'package:flutter/material.dart';
 import 'package:cpfcnpj/cpfcnpj.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
-
+import 'package:path_provider/path_provider.dart';
 import 'package:easy_mask/easy_mask.dart';
 
 
@@ -15,12 +16,13 @@ import 'Adapters/Cliente_Hive_Adapter.dart';
 
 void main() {
   runApp(MyApp());
-  doWhenWindowReady(() {
-    var path =  Directory .current.path;
-        print(Directory.current.parent);
-         Hive.init('$path/DB');   
-   
-         Hive.registerAdapter(ClenteAdapter());  
+  doWhenWindowReady(() async{
+    var document =  await getApplicationDocumentsDirectory();
+
+        print(document.path);
+         Hive.init(document.path+'/Lotus_DB');
+         Hive.registerAdapter(ClenteAdapter()); 
+        
     final win = appWindow;
     final initialSize = Size(600, 450);
     win.minSize = initialSize;
@@ -569,11 +571,11 @@ class Home_state extends State<Home>  {
                                           decoration: BoxDecoration(
                                                           border:Border.all(color: Colors.white, width: 5),
                                                           shape: BoxShape.circle,
-                                                          color: Colors.white,
-                                                          // image: DecorationImage(
-                                                          //  fit: BoxFit.cover,
-                                                          //    image: AssetImage('images/profile.png'),
-                                                          //    ),
+                                                          color: Colors.white,                                                          
+                                                          image: DecorationImage(
+                                                                      fit: BoxFit.cover,
+                                                                      image: globals.form_cliente.ImgBase64.text.isEmpty ? AssetImage("assets/perfil/default.png") : globals.form_cliente.getImagemPerfil()  ,
+                                                                  ),
                                                       ),
                                           child:  Container(  
                                                       transform: Matrix4.translationValues(50.0, 40.0, 0.0),
