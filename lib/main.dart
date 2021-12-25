@@ -1,17 +1,11 @@
 import 'globals.dart' as globals;
-import 'dart:io';
-
-import 'dart:convert';
 import 'package:hive/hive.dart';
 import 'package:flutter/material.dart';
-import 'package:cpfcnpj/cpfcnpj.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:easy_mask/easy_mask.dart';
-
-
 import 'Adapters/Cliente_Hive_Adapter.dart';
 
 
@@ -89,26 +83,39 @@ class Home_state extends State<Home>  {
             child: Column(children: [
               WindowTitleBarBox(
                   child: Row(children: [
-                Expanded(child: MoveWindow()),
-                Row(
-                  children: [
-                    MinimizeWindowButton(
-                        colors: WindowButtonColors(
-                                    iconNormal: Colors.white,
-                                    mouseOver: Color(0x69E8EAF6),
-                                    mouseDown: Color(0x69C5CAE9),
-                                    iconMouseOver: Colors.white,
-                                    iconMouseDown: Colors.white)
-                                ),
-                    CloseWindowButton(
-                        colors: WindowButtonColors(
-                                    mouseOver: Color(0xFFD32F2F),
-                                    mouseDown: Color(0xFFB71C1C),
-                                    iconNormal: Colors.white,
-                                    iconMouseOver: Colors.white)
-                                ),
-                  ],
-                ),
+                      Expanded(child: MoveWindow(
+                        child: Row(children : [
+                                                  Image(
+                                                      image: AssetImage('assets/icons/app_icon.png'),
+                                                      width: 48,
+                                                      height: 48,
+                                                      
+                                                     ),
+                                                  Text("Lotus - Cadastro simples de clientes",
+                                                        style: TextStyle(color: Color(0xffF5F5F5), fontFamily: 'Arial'),
+                                                      )
+                                              ],
+                                  )
+                      )),
+                      Row(
+                        children: [
+                          MinimizeWindowButton(
+                              colors: WindowButtonColors(
+                                          iconNormal: Colors.white,
+                                          mouseOver: Color(0x69E8EAF6),
+                                          mouseDown: Color(0x69C5CAE9),
+                                          iconMouseOver: Colors.white,
+                                          iconMouseDown: Colors.white)
+                                      ),
+                          CloseWindowButton(
+                              colors: WindowButtonColors(
+                                          mouseOver: Color(0xFFD32F2F),
+                                          mouseDown: Color(0xFFB71C1C),
+                                          iconNormal: Colors.white,
+                                          iconMouseOver: Colors.white)
+                                      ),
+                        ],
+                      ),
               ])),
               Spacer(),
                 Row(
@@ -561,8 +568,11 @@ class Home_state extends State<Home>  {
                                     ],
                                   ),
                                 ),
-                                Text(
-                                    "Criado por Melquizedeque S. Lobo     V 1.0")
+                                InkWell(
+                                          child: Text("Criado por Melquizedeque S. Lobo     V 1.0", style: TextStyle(color: Color(0xFF3F51B5))),
+                                          onTap: () => launch('https://github.com/melklobo/lotus')
+                                      ),
+                                
                               ],
                             ),
                             
