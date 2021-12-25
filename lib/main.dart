@@ -1,10 +1,12 @@
 import 'globals.dart' as globals;
 import 'dart:io';
+
 import 'dart:convert';
 import 'package:hive/hive.dart';
 import 'package:flutter/material.dart';
 import 'package:cpfcnpj/cpfcnpj.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:easy_mask/easy_mask.dart';
@@ -19,9 +21,10 @@ void main() {
   doWhenWindowReady(() async{
     var document =  await getApplicationDocumentsDirectory();
 
-        print(document.path);
-         Hive.init(document.path+'/Lotus_DB');
-         Hive.registerAdapter(ClenteAdapter()); 
+    
+    Hive.init(document.path+'/Lotus_DB');
+    Hive.registerAdapter(ClenteAdapter()); 
+
         
     final win = appWindow;
     final initialSize = Size(600, 450);
@@ -32,6 +35,7 @@ void main() {
     win.title = "Lotus - Cadastro simples de clientes";
     win.show();
     globals.form_cliente.listClientes();
+    globals.containsEncryptionKey();
   });
 }
 

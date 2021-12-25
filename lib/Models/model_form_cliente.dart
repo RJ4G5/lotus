@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:convert';
 import 'dart:typed_data';
-
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:image/image.dart' as IMG;
 import '../../globals.dart' as globals;
 import 'package:hive/hive.dart';
@@ -31,9 +31,8 @@ class FORM_CLIENTE {
   final DataTable = [];
 
 
-
   void listClientes() async {
-    Hive.openBox('testBox').then((db) => {
+    Hive.openBox('testBox', encryptionCipher: HiveAesCipher(await globals.readKey())).then((db) => {
           this.DataTable.clear(),
           db.values.forEach((cliente) {
             this.DataTable.insert(0, cliente.toTD());
@@ -45,42 +44,49 @@ class FORM_CLIENTE {
 
   void save() async {
    // var box = await Hive.openBox('testBox');
-    var box = await Hive.openLazyBox('testBox');
+    DB_CLIENTE cliente_DB ;
+    DB_CLIENTE new_cliente;
+    Hive.openBox('testBox', encryptionCipher: HiveAesCipher(await globals.readKey())).then((box) async =>  {
+      
+          if (this.require()) {
+            cliente_DB = await box.get(CNPJ_CPF.text),
 
-    if (this.require()) {
-      DB_CLIENTE cliente_DB = await box.get(CNPJ_CPF.text);
+            new_cliente = await DB_CLIENTE(
+              cnpjcpf: CNPJ_CPF.text,
+              img: ImgBase64.text,
+              nome_fisico_juridico: Nome_fisico_juridico.text,
+              razao_social_nascimento: RazaoSocial_nascimento.text,
+              email: Email.text,
+              telefone: Telefone.text,
+              cep: Cep.text,
+              endereco: Endereco.text,
+              numero: Numero.text,
+              bairro: Bairro.text,
+              cidade: Cidade.text,
+            ),
+            if (cliente_DB == null) {
+              await box.put(CNPJ_CPF.text, new_cliente),
+              await box.compact(),
+              await box.close(),
+              
+              this.DataTable.insert(0, new_cliente.toTD()),
+              this.clearForm(),
+              this.setSnackBar('Salvo!', Color(0xFF388E3C)),
+            } else {         
+          
+              await box.put(CNPJ_CPF.text, new_cliente),
+              await box.compact(),
+              await box.close(),
+              this.DataTable[globals.tableIndexSelected] = new_cliente.toTD(),
+              this.clearForm(),
+              this.setSnackBar('Atualizado!', Color(0xFF388E3C)),
+            }
+          }
+    
+    
+  });
 
-      DB_CLIENTE new_cliente = await DB_CLIENTE(
-        cnpjcpf: CNPJ_CPF.text,
-        img: ImgBase64.text,
-        nome_fisico_juridico: Nome_fisico_juridico.text,
-        razao_social_nascimento: RazaoSocial_nascimento.text,
-        email: Email.text,
-        telefone: Telefone.text,
-        cep: Cep.text,
-        endereco: Endereco.text,
-        numero: Numero.text,
-        bairro: Bairro.text,
-        cidade: Cidade.text,
-      );
-      if (cliente_DB == null) {
-        await box.put(CNPJ_CPF.text, new_cliente);
-        await box.compact();  
-        await box.close();
-        
-        this.DataTable.insert(0, new_cliente.toTD());
-        this.clearForm();
-        this.setSnackBar('Salvo!', Color(0xFF388E3C));
-      } else {         
-     
-        await box.put(CNPJ_CPF.text, new_cliente);
-        await box.compact();  
-        await box.close();
-        this.DataTable[globals.tableIndexSelected] = new_cliente.toTD();
-        this.clearForm();
-        this.setSnackBar('Atualizado!', Color(0xFF388E3C));
-      }
-    }
+    
   }
 
   void clearForm() {
@@ -101,7 +107,8 @@ class FORM_CLIENTE {
   }
 
   void delete() async {
-    var box = await Hive.openLazyBox('testBox');
+  
+    var box = await Hive.openBox('testBox',encryptionCipher: HiveAesCipher(await globals.readKey()));
     TD td = this.DataTable[globals.tableIndexSelected];
     box.delete(td.cnpjcpf).then((value) => {
           this.DataTable.remove(td),
@@ -113,7 +120,7 @@ class FORM_CLIENTE {
   }
 
   void getCliente(String key) async {
-    final DB = await Hive.openBox('testBox');
+    final DB = await Hive.openBox('testBox',encryptionCipher: HiveAesCipher(await globals.readKey()));
     DB_CLIENTE cliente = DB.get(key);
 
     this.CNPJ_CPF.text = cliente.cnpjcpf;
@@ -169,8 +176,8 @@ class FORM_CLIENTE {
     return resposta;
   }
 
-  void search(e) {
-    Hive.openBox('testBox').then((db) => {
+  void search(e) async{
+    Hive.openBox('testBox',encryptionCipher: HiveAesCipher(await globals.readKey())).then((db) => {
           this.DataTable.clear(),
           db.values.forEach((cliente) {
             if (this.removeAcent(cliente.toString()).contains(e.toLowerCase())) {
@@ -222,21 +229,9 @@ class FORM_CLIENTE {
   }
   getImagemPerfil(){
       return MemoryImage(Base64Decoder().convert(this.ImgBase64.text));
-  }
+  } 
 
-  
 
-  String setPathExc(String path) {
-      final DB =  Hive.openBox('config');
-      DB.then((conn) => conn.put("path", path));   
-      return path;
-  }
-
-  String getPathExc(){
-    final DB =  Hive.openBox('config');
-     return DB.then((conn) => conn.get("path")).toString();   
-      
-  }
 
   void setSnackBar(String text, Color background) {
     final snackBar = SnackBar(
