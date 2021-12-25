@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 import './model_table_cliente.dart';
 
 @HiveType(typeId: 0)
-class DB_CLIENTE {
+class DB_CLIENTE extends HiveObject {
   DB_CLIENTE(
       {required this.cnpjcpf,
       this.img = "",

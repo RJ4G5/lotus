@@ -44,7 +44,8 @@ class FORM_CLIENTE {
   }
 
   void save() async {
-    var box = await Hive.openBox('testBox');
+   // var box = await Hive.openBox('testBox');
+    var box = await Hive.openLazyBox('testBox');
 
     if (this.require()) {
       DB_CLIENTE cliente_DB = await box.get(CNPJ_CPF.text);
@@ -64,14 +65,17 @@ class FORM_CLIENTE {
       );
       if (cliente_DB == null) {
         await box.put(CNPJ_CPF.text, new_cliente);
-        box.close();
+        await box.compact();  
+        await box.close();
         
         this.DataTable.insert(0, new_cliente.toTD());
         this.clearForm();
         this.setSnackBar('Salvo!', Color(0xFF388E3C));
-      } else {
+      } else {         
+     
         await box.put(CNPJ_CPF.text, new_cliente);
-        box.close();
+        await box.compact();  
+        await box.close();
         this.DataTable[globals.tableIndexSelected] = new_cliente.toTD();
         this.clearForm();
         this.setSnackBar('Atualizado!', Color(0xFF388E3C));
@@ -81,6 +85,7 @@ class FORM_CLIENTE {
 
   void clearForm() {
     this.CNPJ_CPF.clear();
+    this.ImgBase64.clear();
     this.Nome_fisico_juridico.clear();
     this.RazaoSocial_nascimento.clear();
     this.Email.clear();
@@ -96,10 +101,11 @@ class FORM_CLIENTE {
   }
 
   void delete() async {
-    var box = await Hive.openBox('testBox');
+    var box = await Hive.openLazyBox('testBox');
     TD td = this.DataTable[globals.tableIndexSelected];
     box.delete(td.cnpjcpf).then((value) => {
           this.DataTable.remove(td),
+          box.compact(),       
           box.close(),
           this.clearForm(),
           this.setSnackBar('Removido com sucesso!', Color(0xFF388E3C))
@@ -111,6 +117,7 @@ class FORM_CLIENTE {
     DB_CLIENTE cliente = DB.get(key);
 
     this.CNPJ_CPF.text = cliente.cnpjcpf;
+    this.ImgBase64.text = cliente.img;
     this.Nome_fisico_juridico.text = cliente.nome_fisico_juridico;
     this.RazaoSocial_nascimento.text = cliente.razao_social_nascimento;
     this.Email.text = cliente.email;
@@ -121,8 +128,7 @@ class FORM_CLIENTE {
     this.Bairro.text = cliente.bairro;
     this.Cidade.text = cliente.cidade;
 
-    globals.tableIndexSelected =
-        this.DataTable.indexWhere(((td) => td.cnpjcpf == cliente.cnpjcpf));
+    globals.tableIndexSelected = this.DataTable.indexWhere(((td) => td.cnpjcpf == cliente.cnpjcpf));
     globals.CNPJ_CPF_enabled = false;
     
     DB.close();
@@ -209,6 +215,10 @@ class FORM_CLIENTE {
           this.Context.state.setState(() => {}); 
       }
       
+  }
+  void removeImagem(){
+      this.ImgBase64.clear();
+      this.Context.state.setState(() => {}); 
   }
   getImagemPerfil(){
       return MemoryImage(Base64Decoder().convert(this.ImgBase64.text));

@@ -636,7 +636,7 @@ class Home_state extends State<Home>  {
                                                                                                 ),)
                                                                                             
                                                                                         ]),
-                                                                              onTap: () => print("remover"),
+                                                                              onTap: () => globals.form_cliente.removeImagem(),
                                                                         ),
                                                                        
                                                                                                                                                                                      
