@@ -44,25 +44,25 @@ class FORM_CLIENTE {
 
   void save() async {
    // var box = await Hive.openBox('testBox');
-    DB_CLIENTE cliente_DB ;
-    DB_CLIENTE new_cliente;
+    var cliente_DB ;
+    var new_cliente;
     Hive.openBox('testBox', encryptionCipher: HiveAesCipher(await globals.readKey())).then((box) async =>  {
       
           if (this.require()) {
             cliente_DB = await box.get(CNPJ_CPF.text),
-
-            new_cliente = await DB_CLIENTE(
-              cnpjcpf: CNPJ_CPF.text,
-              img: ImgBase64.text,
-              nome_fisico_juridico: Nome_fisico_juridico.text,
-              razao_social_nascimento: RazaoSocial_nascimento.text,
-              email: Email.text,
-              telefone: Telefone.text,
-              cep: Cep.text,
-              endereco: Endereco.text,
-              numero: Numero.text,
-              bairro: Bairro.text,
-              cidade: Cidade.text,
+           
+             new_cliente = await DB_CLIENTE(
+                  cnpjcpf: CNPJ_CPF.text,
+                  img: ImgBase64.text,
+                  nome_fisico_juridico: Nome_fisico_juridico.text,
+                  razao_social_nascimento: RazaoSocial_nascimento.text,
+                  email: Email.text,
+                  telefone: Telefone.text,
+                  cep: Cep.text,
+                  endereco: Endereco.text,
+                  numero: Numero.text,
+                  bairro: Bairro.text,
+                  cidade: Cidade.text,
             ),
             if (cliente_DB == null) {
               await box.put(CNPJ_CPF.text, new_cliente),
@@ -84,6 +84,9 @@ class FORM_CLIENTE {
           }
     
     
+  }).catchError((onError)=>{
+  
+        this.setSnackBar(onError.toString(), Color(0xFFB71C1C))
   });
 
     

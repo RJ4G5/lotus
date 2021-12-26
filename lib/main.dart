@@ -569,7 +569,7 @@ class Home_state extends State<Home>  {
                                   ),
                                 ),
                                 InkWell(
-                                          child: Text("Criado por Melquizedeque S. Lobo     V 1.0", style: TextStyle(color: Color(0xFF3F51B5))),
+                                          child: Text("Criado por Melquizedeque S. Lobo     V 1.1.0", style: TextStyle(color: Color(0xFF3F51B5))),
                                           onTap: () => launch('https://github.com/melklobo/lotus')
                                       ),
                                 
