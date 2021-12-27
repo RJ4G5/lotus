@@ -63,13 +63,13 @@ IDI_APP_ICON            ICON                    "resources\\app_icon.ico"
 #ifdef FLUTTER_BUILD_NUMBER
 #define VERSION_AS_NUMBER FLUTTER_BUILD_NUMBER
 #else
-#define VERSION_AS_NUMBER 1,1,0
+#define VERSION_AS_NUMBER 1,2,0
 #endif
 
 #ifdef FLUTTER_BUILD_NAME
 #define VERSION_AS_STRING #FLUTTER_BUILD_NAME
 #else
-#define VERSION_AS_STRING "1.1.0"
+#define VERSION_AS_STRING "1.2.0"
 #endif
 
 VS_VERSION_INFO VERSIONINFO
@@ -93,7 +93,7 @@ BEGIN
             VALUE "FileDescription", "Cadastro simples de clientes." "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "lotus" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2021 com.lotus. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright Free." "\0"
             VALUE "OriginalFilename", "lotus.exe" "\0"
             VALUE "ProductName", "Lotus" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"

@@ -514,62 +514,70 @@ class Home_state extends State<Home>  {
                                       ),
                                       SizedBox(
                                         width: double.infinity,
-                                        child: DataTable(
-                                                  showCheckboxColumn: false,
-                                                  headingRowHeight: 30,
-                                                  dataRowHeight: 25,
-                                                  
-                                                  showBottomBorder: true,
+                                        height: 138,
+                                        child: SingleChildScrollView(
+                                            scrollDirection: Axis.vertical,
+                                            child:DataTable(
+                                                                             
+                                                    showCheckboxColumn: false,                                                    
+                                                    headingRowHeight: 30,                                                    
+                                                    dataRowHeight: 25,                                                    
+                                                    showBottomBorder: true,
+                                                    
 
-                                                  columns: [
-                                                    DataColumn(
-                                                      label: Text("CPF/CNPJ"),
-                                                      numeric: false,
-                                                      ),
+                                                    columns: [
                                                       DataColumn(
-                                                      label: Text("NOME/RAZÃO SOCIAL"),                                                              
-                                                      numeric: false,
-                                                      ),
-                                                      DataColumn(                                                      
-                                                      label: Text('TELEFONE'),
-                                                      numeric: false,
-                                                      ),
-                                                  ],
-                                                  rows: globals.form_cliente.DataTable.map((e) => DataRow(
-                                                          onSelectChanged: (value) {
-                                                            globals.form_cliente.getCliente(e.cnpjcpf);
-                                                          },
-                                                          cells: [
-                                                            DataCell(                                                              
-                                                              Text(e.cnpjcpf),                                                              
-                                                            ),
-                                                            DataCell(
-                                                              Tooltip(
-                                                                      message: e.nome,
-                                                                      child: Container(
-                                                                                width: 150,
-                                                                                child: Text(
-                                                                                            e.nome,
-                                                                                            maxLines: 1,
-                                                                                            overflow: TextOverflow.ellipsis,
-                                                                                            softWrap: true,
-                                                                                          ),
-                                                                              )
-                                                                      )
-                                                            ),
-                                                            DataCell(                                                              
-                                                              Text(e.telefone)
-                                                            ),
-                                                          ]
-                                                    )).toList(),
+                                                        
+                                                        label: Text("CPF/CNPJ"),
+                                                        numeric: false,
+                                                        ),
+                                                        DataColumn(
+                                                        label: Text("NOME/RAZÃO SOCIAL"),                                                              
+                                                        numeric: false,
+                                                        ),
+                                                        DataColumn(                                                      
+                                                        label: Text('TELEFONE'),
+                                                        numeric: false,
+                                                        ),
+                                                    ],
+                                                    rows: globals.form_cliente.DataTable.map((e) => DataRow(
+                                                            onSelectChanged: (value) {
+                                                              globals.form_cliente.getCliente(e.cnpjcpf);
+                                                            },
+                                                            cells: [
+                                                              DataCell(                                                              
+                                                                Text(e.cnpjcpf),                                                              
+                                                              ),
+                                                              DataCell(
+                                                                Tooltip(
+                                                                        message: e.nome,
+                                                                        child: Container(
+                                                                                  width: 150,
+                                                                                  child: Text(
+                                                                                              e.nome,
+                                                                                              maxLines: 1,
+                                                                                              overflow: TextOverflow.ellipsis,
+                                                                                              softWrap: true,
+                                                                                            ),
+                                                                                )
+                                                                        )
+                                                              ),
+                                                              DataCell(                                                              
+                                                                Text(e.telefone)
+                                                              ),
+                                                            ]
+                                                      )).toList(),
+                                            ) ,
                                           )
+                                        
+                                        
                                         
                                       )
                                     ],
                                   ),
                                 ),
                                 InkWell(
-                                          child: Text("Criado por Melquizedeque S. Lobo     V 1.1.0", style: TextStyle(color: Color(0xFF3F51B5))),
+                                          child: Text("Criado por Melquizedeque S. Lobo     V 1.2.0", style: TextStyle(color: Color(0xFF3F51B5))),
                                           onTap: () => launch('https://github.com/melklobo/lotus')
                                       ),
                                 
